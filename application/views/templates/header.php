@@ -19,7 +19,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="">
-        			<img alt="Brand" src="imagenes/logoChico.png" width="28" height="25">
+        			<img alt="Brand" src="<?php echo site_url('imagenes/logoChico.png'); ?>" width="28" height="25">
       			</a>
 			</div>
 
@@ -66,6 +66,6 @@
 	
 	<div style="text-align:center">
 		<br><br>		
-		<p style="text-align=center;"><img src="imagenes/logo.png" style="width:800;height:200;" ></p>
+		<p style="text-align=center;"><img src="<?php echo site_url('imagenes/logo.png'); ?>" style="width:800;height:200;" ></p>
 		<h1><?php echo $page_header; ?></h1>
 	</div>
