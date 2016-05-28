@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Inicio extends CI_Controller {
+class CerrarSesion extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,19 +21,12 @@ class Inicio extends CI_Controller {
 
 	public function __construct(){
         parent::__construct();
-        $this->load->model('couchs_model');
-        $this->load->helper('url_helper');
-        $this->load->library('session');
+       	$this->load->helper('url');
      }
 
 	public function index()
 	{
-		$data['title'] = 'CouchInn';
-		$data['page_header'] = '';
-		$data['couchs'] = $this->couchs_model->getCouchs();
-
-		$this->load->view('templates/header.php', $data);
-		$this->load->view('paginas/inicio',$data);
-		$this->load->view('templates/footer.php', $data);
+		$this->session->sess_destroy();
+		echo "<script> alert('Sesión cerrada correctamente'); window.location.href = '" . base_url()."' </script>";
 	}
 }

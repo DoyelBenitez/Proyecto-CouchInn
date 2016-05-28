@@ -12,6 +12,6 @@
 </div>
 
 <div style="margin: 0 auto; text-align: center">
-	<a href="<?php echo site_url('index.php/admin/listarTipos');?>" style="text-align: center" > Listar Tipos </a>
+	<a href="<?php echo site_url('index.php/tipos/listarTipos');?>" style="text-align: center" > Listar Tipos </a>
 	<br>
 </div>
