@@ -11,6 +11,10 @@
 				echo '</div>';
 			}
 			?>
+		<!-- 	Este input oculto es el que guarda el tipoViejo a modificar para despues tenerlo en el controlador 
+				cuando vuelva de la validacion y esta vista -->
+		<input type="hidden" name="tipoViejo" value="<?php echo $tipoViejo; ?>" />
+		<p> <?php echo $tipoViejo; ?> </p>
 	</div>
 	<div>
 		<input type="submit" value="Enviar" class="btn btn-default"/>

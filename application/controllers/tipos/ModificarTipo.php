@@ -27,7 +27,8 @@ class ModificarTipo extends CI_Controller {
      }
 
 	public function index($tipoViejo)
- 	{
+ 	{ 
+
  		//Control de que solo acceda el admin
         $tipoUsuario = $this->session->userdata('tipo');
         if ($tipoUsuario != 'admin')
@@ -38,9 +39,9 @@ class ModificarTipo extends CI_Controller {
         {
 	 		$data['title'] = 'Modificar Tipo de Hospedaje';
 			$data['page_header'] = '';
-			$tipos['tipoViejo'] = $tipoViejo;
+			$data['tipoViejo'] = $tipoViejo;
 
-	 		$this->form_validation->set_rules('tipo', 'Tipo', 'callback_tipo_check|alpha');
+	 		$this->form_validation->set_rules('tipo', 'tipo', 'callback_tipo_check|alpha|required');
 
 			if($this->form_validation->run() == FALSE)
 			{
@@ -50,7 +51,7 @@ class ModificarTipo extends CI_Controller {
 			}
 	     	else
 	     	{
-	     		$tipo = $tipos['tipoViejo'];
+	     		$tipo = $_POST['tipoViejo'];
 	     		$tipoNuevo = strtolower($_POST['tipo']);
 		   		$this->tipos_model->modificarTipoDeHospedaje($tipo,$tipoNuevo);	
 		     	echo "<script> alert('El tipo ".$tipo." ha sido modificado por ".$tipoNuevo." satisfactoriamente'); window.location.href = '" . base_url() . "index.php/tipos/listarTipos'; </script>";
@@ -61,7 +62,7 @@ class ModificarTipo extends CI_Controller {
      public function tipo_check($str)
 	{
 		$tipo = strtolower($str);
-		if (!empty($this->tipos_model->existeTipo($tipo)))
+		if (!empty($this->tipos_model->existeNombreTipo($tipo)))
 		{
 			$this->form_validation->set_message('tipo_check', 'El tipo ingresado ya se encuentra en el sistema.');
 			return FALSE;

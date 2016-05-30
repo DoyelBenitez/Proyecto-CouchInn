@@ -1,7 +1,7 @@
 <?php echo form_open('/index.php/sesiones/iniciarSesion'); ?>
 
 <div class="container" style="">
-	<div class="form-group">
+	<div class="form-group col-md-offset-4 col-md-4">
 		<h2>Iniciar Sesión</h2>
 		<br>
 		
@@ -24,10 +24,8 @@
 				echo '</div>';
 			}
 			?>
-	</div>
-
-	<div>
-		<input type="submit" value="Enviar" class="btn btn-default"/>
+		<br>
+		<input type="submit" value="Enviar" class="btn btn-default pull-right"/>
 	</div>
 </div>
 

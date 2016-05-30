@@ -140,6 +140,8 @@ class CI_Form_validation {
 			unset($rules['error_suffix']);
 		}
 
+		setLocale(LC_CTYPE, 'FR_fr.UTF-8');
+
 		// Validation rules can be stored in a config file.
 		$this->_config_rules = $rules;
 

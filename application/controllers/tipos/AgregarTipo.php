@@ -60,7 +60,7 @@ class AgregarTipo extends CI_Controller {
     public function tipo_check($str)
 	{
 		$tipo = strtolower($str);
-		if (!empty($this->tipos_model->existeTipo($tipo)))
+		if (!empty($this->tipos_model->existeNombreTipo($tipo)))
 		{
 			$this->form_validation->set_message('tipo_check', 'El tipo ingresado ya se encuentra en el sistema.');
 			return FALSE;

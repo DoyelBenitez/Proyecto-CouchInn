@@ -18,9 +18,15 @@ class Sesiones_Model extends CI_Model {
         	return $query->result();
         }
 
+        public function makeUserPremium($email)
+        {
+        	$sentence = "UPDATE  `couchInn`.`usuario` SET  `tipo` =  'premium' WHERE  `usuario`.`email` = ? ;";
+        	$query = $this->db->query($sentence,array($email));	
+        }
+
         public function agregarUsuario($arrayDatos)
         {	
-        	if (!empty(getUser($arrayDatos->email))) {
+        	if (empty($this->getUser($arrayDatos['email']))) {
 		        $sentence = "INSERT INTO  `couchInn`.`usuario` (
 								`id_usuario` ,
 								`nombre` ,

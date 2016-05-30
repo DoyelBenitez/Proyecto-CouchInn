@@ -39,7 +39,7 @@ class EliminarTipo extends CI_Controller {
          	if(!empty($this->tipos_model->existeTipo($tipo)))
          	{
          		$this->tipos_model->eliminarTipoDeHospedaje($tipo);	
-         		echo "<script> alert('El tipo ".$tipo." ha sido eliminado satisfactoriamente'); window.location.href = '" . base_url() . "index.php/tipos/listarTipos'; </script>";
+         		echo "<script> alert('El tipo ha sido eliminado satisfactoriamente'); window.location.href = '" . base_url() . "index.php/tipos/listarTipos'; </script>";
          	}
          	else
          	{
