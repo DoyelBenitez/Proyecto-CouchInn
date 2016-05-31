@@ -39,14 +39,24 @@ class ModificarTipo extends CI_Controller {
         {
 	 		$data['title'] = 'Modificar Tipo de Hospedaje';
 			$data['page_header'] = '';
-			$data['tipoViejo'] = $tipoViejo;
+
+			//Checkeo requerido para no perder el tipoViejo despues de validacion erronea
+			if (empty($_POST['tipoViejo'])) {
+				$data['tipoViejo'] = $tipoViejo;
+			}
+			else
+			{
+				$data['tipoViejo'] = $_POST['tipoViejo'];
+			}
+
 
 	 		$this->form_validation->set_rules('tipo', 'tipo', 'callback_tipo_check|alpha|required');
+	 		$this->form_validation->set_rules('tipoViejo', 'tipo viejo', 'required');
 
 			if($this->form_validation->run() == FALSE)
 			{
 				$this->load->view('templates/header.php', $data);
-				$this->load->view('paginas/tipos/modificarTipo');
+				$this->load->view('paginas/tipos/modificarTipo', $data);
 				$this->load->view('templates/footer.php', $data);
 			}
 	     	else
@@ -54,7 +64,7 @@ class ModificarTipo extends CI_Controller {
 	     		$tipo = $_POST['tipoViejo'];
 	     		$tipoNuevo = strtolower($_POST['tipo']);
 		   		$this->tipos_model->modificarTipoDeHospedaje($tipo,$tipoNuevo);	
-		     	echo "<script> alert('El tipo ".$tipo." ha sido modificado por ".$tipoNuevo." satisfactoriamente'); window.location.href = '" . base_url() . "index.php/tipos/listarTipos'; </script>";
+		     	echo "<script> alert('El tipo ha sido modificado por satisfactoriamente'); window.location.href = '" . base_url() . "index.php/tipos/listarTipos'; </script>";
 	     	}
 		}
      }

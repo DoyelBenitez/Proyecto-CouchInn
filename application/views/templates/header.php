@@ -71,11 +71,34 @@
 							echo '<li><a href="'.site_url('index.php/sesiones/registrarse').'">Registarse</a></li>';
 						}
 					?>
+
+					<!-- Dropdown de datos del usuario -->
 					<li class="dropdown">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle">Usuario <?php if(!empty($usuarioTipo)) echo '('.$usuarioTipo.')'; ?> <b class="caret"></b></a>
 				        <ul class="dropdown-menu">
-				            <li><a href="#">Action</a></li>
-				            <li><a href="#">Another action</a></li>
+				        
+				        <!-- Opciones de todos -->
+						<?php 
+				        	if (!empty($usuarioTipo)) {
+				        		echo '<li><a href="#"> Ver datos de cuenta </a></li>';
+				        	}
+				         ?> 
+
+				        <!-- Opciones del admin -->
+				        <?php 
+				        	if ($usuarioTipo == 'admin') {
+				        		echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
+			     				echo '<li><a href="#">Eliminar usuario</a></li>';
+				        	}
+				        ?> 
+
+				        <!-- Opciones del usuario comun -->
+				        <?php 
+				        	if ($usuarioTipo == 'comun') {
+				        		echo '<li><a href="'.site_url('index.php/sesiones/obtenerPremium').'"> Pasarse a PREMIUM</a></li>';
+				        	}
+				         ?>   
+
 				        </ul>
 					</li>
 				</ul>
