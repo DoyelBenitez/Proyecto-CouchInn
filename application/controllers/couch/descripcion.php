@@ -12,6 +12,7 @@ class Descripcion extends CI_Controller {
 
 	public function index()
 	{
+		$data['title'] = 'DescripcionCouch';
 		$data['porcentaje'] = '50%';
 		$data['page_header'] = '';
 		$data['imagen'] = $this->couchs_model->getCouchImagenes(1);

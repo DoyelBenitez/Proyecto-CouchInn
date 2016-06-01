@@ -2,7 +2,7 @@
 	<ul class="col-lg-offset-3 col-lg-6 list-group">
 		<?php foreach ($imagen as $couch) { ?>
 			<li class="row list-group-item">
-				<p><img src= <?php echo $couch->imagen ?> alt="imagen" style="height:200px;width:550px"></p>	
+				<p><img src= <?php echo site_url($couch->imagen) ?> alt="imagen" style="height:200px;width:550px"></p>	
 			</li>
 		<?php } 
 		?>	
@@ -10,18 +10,7 @@
 </div>
 
 
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>DescripcionCouch</title>
 
-
-	</style>
-</head>
-<body>
 
 <div id="container">
 	<h1>Descripcion</h1>
@@ -39,8 +28,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </div>
 
-</body>
-</html>
 
 
 

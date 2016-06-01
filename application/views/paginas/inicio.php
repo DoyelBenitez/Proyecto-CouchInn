@@ -5,8 +5,8 @@
 				<h3><?php echo $couch->titulo ?></h3>
 				<a href="<?php echo site_url('index.php/couch/descripcion')//.'/'. $couch->id_couch; ?>" >
 				<p><img src= <?php echo $couch->imagen ?> alt="imagen" style="height:400px;width:500px"></p>
-				<p><?php echo $couch->descripcion ?></p>
 				</a>
+				<p><?php echo $couch->titulo ?></p>
 			</li>
 		<?php } 
 		?>	
