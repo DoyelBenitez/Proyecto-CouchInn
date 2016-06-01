@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<title>DescripcionCouch</title>
 
 
 	</style>
@@ -23,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
+	<h1>Descripcion</h1>
 
 	<div id="body">
 		<?php foreach ($couchs as $couch) { ?>
