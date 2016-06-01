@@ -52,7 +52,6 @@ class Registrarse extends CI_Controller {
 		//Si ya se validaron todos los campos creo el usuario y lo logeo
 		else
 		{
-			echo "<script> alert('". $_POST['fecha_nac']. "'); </script>";
 			//Preparo los datos a cargar en la sesión
 				$usuario = array(
 							'nombre' 			=> $_POST['nombre'],
@@ -62,15 +61,6 @@ class Registrarse extends CI_Controller {
 							'telefono'			=> $_POST['telefono'],
 							'fecha_nacimiento'	=> $_POST['fecha_nac']
 							 );
-			$usuario['tipo'] = 'comun';
-
-			echo $usuario['nombre'];
-			echo $usuario['apellido'];
-			echo $usuario['email'];
-			echo $usuario['passw'];
-			echo $usuario['telefono'];
-			echo $usuario['fecha_nacimiento'];
-			echo $usuario['tipo'];
 			
 			//Seteo por defecto el tipo en comun
 			$usuario['tipo'] = 'comun';
@@ -86,7 +76,7 @@ class Registrarse extends CI_Controller {
 			if (!empty($_POST['tipo'])) 
 			{
 				
-				//REDIRIGIR A PREMIUM
+				echo "<script> window.location.href = '". site_url('index.php/sesiones/comprarPremium'). "'; </script>";
 			}
 			else
 			{

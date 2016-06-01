@@ -25,7 +25,7 @@
 			}
 			?>
 		<br>
-		<input type="submit" value="Enviar" class="btn btn-default pull-right"/>
+		<input type="submit" value="Enviar" class="btn btn-default "/>
 	</div>
 </div>
 

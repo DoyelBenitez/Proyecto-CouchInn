@@ -60,7 +60,8 @@
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
-					<?php 
+					<?php
+
 						if(!empty($usuarioTipo))
 						{
 							echo '<li><a href="'.site_url('index.php/sesiones/cerrarSesion').'">Cerrar Sesión ('.$usuarioNombre.')</a></li>';
@@ -72,35 +73,45 @@
 						}
 					?>
 
-					<!-- Dropdown de datos del usuario -->
-					<li class="dropdown">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle">Usuario <?php if(!empty($usuarioTipo)) echo '('.$usuarioTipo.')'; ?> <b class="caret"></b></a>
-				        <ul class="dropdown-menu">
-				        
-				        <!-- Opciones de todos -->
-						<?php 
-				        	if (!empty($usuarioTipo)) {
-				        		echo '<li><a href="#"> Ver datos de cuenta </a></li>';
-				        	}
-				         ?> 
+					<!-- Dropdown de datos del usuario logueado-->
 
-				        <!-- Opciones del admin -->
-				        <?php 
-				        	if ($usuarioTipo == 'admin') {
-				        		echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
-			     				echo '<li><a href="#">Eliminar usuario</a></li>';
-				        	}
-				        ?> 
+					<?php
+					//Si no está logueado
+					if (!empty($usuarioTipo)) {
+						
+						echo '<li class="dropdown">';
+							echo '<a href="#" data-toggle="dropdown" class="dropdown-toggle">Usuario';
+							if(!empty($usuarioTipo)){
+								echo '('.$usuarioTipo.')'; echo '<b class="caret"></b></a>';
+							} 
+					        echo '<ul class="dropdown-menu">';
+					     ?>   
+					        <!-- Opciones de todos -->
+							<?php 
+					        	if (!empty($usuarioTipo)) {
+					        		echo '<li><a href="#"> Ver datos de cuenta </a></li>';
+					        	}
+					         ?> 
 
-				        <!-- Opciones del usuario comun -->
-				        <?php 
-				        	if ($usuarioTipo == 'comun') {
-				        		echo '<li><a href="'.site_url('index.php/sesiones/obtenerPremium').'"> Pasarse a PREMIUM</a></li>';
-				        	}
-				         ?>   
+					        <!-- Opciones del admin -->
+					        <?php 
+					        	if ($usuarioTipo == 'admin') {
+					        		echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
+				     				echo '<li><a href="#">Eliminar usuario</a></li>';
+					        	}
+					        ?> 
 
-				        </ul>
-					</li>
+					        <!-- Opciones del usuario comun -->
+					        <?php 
+					        	if ($usuarioTipo == 'comun') {
+					        		echo '<li><a href="'.site_url('index.php/sesiones/comprarPremium').'"> Pasarse a PREMIUM</a></li>';
+					        	}
+					           
+
+					        echo '</ul>';
+						echo '</li>';
+					}
+					?>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -126,4 +137,6 @@
 				}
 			}
 		?>
+
+
 	</div>
