@@ -32,27 +32,7 @@
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					
-					<!-- Current link (no creo que lo usemos)
-					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-					<li><a href="#">Link</a></li>}
-					-->
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Datos <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"> Admin </li>
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul>
-					</li>
-				</ul>
+		
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Search">
@@ -89,6 +69,7 @@
 					        <!-- Opciones de todos -->
 							<?php 
 					        	if (!empty($usuarioTipo)) {
+					        		echo '<li class="dropdown-header">Cuenta</li>';
 					        		echo '<li><a href="#"> Ver datos de cuenta </a></li>';
 					        	}
 					         ?> 
@@ -96,6 +77,7 @@
 					        <!-- Opciones del admin -->
 					        <?php 
 					        	if ($usuarioTipo == 'admin') {
+					        		echo '<li class="dropdown-header">Admin</li>';
 					        		echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
 				     				echo '<li><a href="#">Eliminar usuario</a></li>';
 					        	}
@@ -121,7 +103,9 @@
 		<br><br>	
 		
 		<!-- Imagen Grande de logo -->
+		<a href="<?php echo site_url(); ?>">
 		<p style="text-align=center;"><img src="<?php echo site_url('imagenes/logo.png'); ?>" width="800" height="200" ></p>
+		</a>
 		<h1><?php echo $page_header; ?></h1>
 		
 

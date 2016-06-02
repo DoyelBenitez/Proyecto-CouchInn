@@ -26,6 +26,12 @@
 			?>
 		<br>
 		<input type="submit" value="Enviar" class="btn btn-default "/>
+		<br><br>
+		
+		<!-- Recuperar contraseña -->
+		<a href="<?php echo site_url('index.php/sesiones/recuperar'); ?>">
+		<p> ¿No te acordás la contraseña? Recuperala aquí.</p>
+		</a>
 	</div>
 </div>
 

@@ -24,6 +24,12 @@ class Sesiones_Model extends CI_Model {
         	$query = $this->db->query($sentence,array($email));	
         }
 
+        public function getPassw($email)
+        {       
+                $sentence = 'SELECT u.passw FROM usuario u WHERE u.email = ? ';
+                $query = $this->db->query($sentence, array($email));
+        }
+
         public function agregarUsuario($arrayDatos)
         {	
         	if (empty($this->getUser($arrayDatos['email']))) {

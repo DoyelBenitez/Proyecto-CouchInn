@@ -1,12 +1,11 @@
-<div class="container">
-		<?php foreach ($imagen as $couch) { ?>
 
-			<div class="form-horizontal">
-				<p><img src= <?php echo site_url($couch->imagen) ?>  align="left" alt="imagen"  style="height:300px;width:300px" HSPACE="40" VSPACE="30" ></p>	
-			</li>
-		<?php } 
-		?>	
-	</ul>
+<div class="container">
+	<div class="form-horizontal">
+		<?php 
+		foreach ($imagen as $couch) {
+				echo '<p><img src=" '. site_url($couch->imagen). '" align="left" alt="imagen"  style="height:300px;width:300px" HSPACE="40" VSPACE="30" ></p>';
+		} ?>
+	</div>
 </div>
 
 <div>
