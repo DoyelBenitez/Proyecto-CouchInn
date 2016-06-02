@@ -3,7 +3,7 @@
 		<?php foreach ($couchs as $couch) { ?>
 			<li class="row list-group-item">
 				<h3><?php echo $couch->titulo ?></h3>
-				<a href="<?php echo site_url('index.php/couch/descripcion')//.'/'. $couch->id_couch; ?>" >
+				<a href="<?php echo site_url('index.php/couch/descripcion/mostrar/').'/'. $couch->id_couch; ?>" >
 				<p><img src= <?php echo $couch->imagen ?> alt="imagen" style="height:400px;width:500px"></p>
 				</a>
 				<p><?php echo $couch->titulo ?></p>
