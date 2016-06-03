@@ -49,14 +49,14 @@
 						else
 						{
 							echo '<li><a href="'.site_url('index.php/sesiones/iniciarSesion').'">Iniciar Sesión</a></li>';
-							echo '<li><a href="'.site_url('index.php/sesiones/registrarse').'">Registarse</a></li>';
+							echo '<li><a href="'.site_url('index.php/sesiones/registrarse').'">Registrarse</a></li>';
 						}
 					?>
 
 					<!-- Dropdown de datos del usuario logueado-->
 
 					<?php
-					//Si no está logueado
+					//Si está logueado
 					if (!empty($usuarioTipo)) {
 						
 						echo '<li class="dropdown">';
@@ -70,7 +70,7 @@
 							<?php 
 					        	if (!empty($usuarioTipo)) {
 					        		echo '<li class="dropdown-header">Cuenta</li>';
-					        		echo '<li><a href="#"> Ver datos de cuenta </a></li>';
+					        		echo '<li><a href="'.site_url('index.php/sesiones/modificarCuenta').'"> Modificar datos de cuenta </a></li>';
 					        	}
 					         ?> 
 

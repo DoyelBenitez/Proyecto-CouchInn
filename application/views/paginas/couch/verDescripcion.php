@@ -11,7 +11,7 @@
 			 	
 			 	<ul class="list group">	
 					<li> Puntaje promedio: <?php echo $couch->Porcentaje ?>.</li>
-					<li> Capcidad: <?php echo $couch->capacidad ?> persona/s.</li>
+					<li> Capacidad: <?php echo $couch->capacidad ?> persona/s.</li>
 				 </ul>
 			<?php } ?>
 	</div>
