@@ -44,17 +44,16 @@
 		<br>
 
 
-		<!-- Fecha de vencimiento(HACE FALTA?)
 		<label for="fecha_ven"> Fecha de Vencimiento de la Tarjeta: </label>
 		<input type="date" name="fecha_ven" step="1" min="1900-01-01" max="<?php //echo date("Y-m-d");?>" class="form-control">	
 			
-			<?php/* if(!empty(form_error('fecha_ven'))){
+			<?php if(!empty(form_error('fecha_ven'))){
 					echo '<div class="alert alert-danger">';
 					echo form_error('fecha_ven');
 					echo '</div>';
 				}
-				*/?>
-		<br>-->
+				?>
+		<br>
 
 		<input type="submit" value="Enviar" class="btn btn-default "/>
 	</div>

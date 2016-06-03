@@ -110,7 +110,7 @@
 		
 
 		<!-- Boton para ir atras: -->
-		<?php
+		<?php /*
 			$currentURL = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			if ( $currentURL != base_url())
 			{
@@ -119,7 +119,7 @@
 					$referer = $_SERVER['HTTP_REFERER'];
 					echo '<a href="'.$referer.'" style= "text-align:center" class="btn btn-default"> Ir atrás </a>';
 				}
-			}
+			}*/
 		?>
 
 

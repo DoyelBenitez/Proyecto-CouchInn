@@ -48,14 +48,12 @@ class Recuperar extends CI_Controller {
 			}
 			//Si ya se validaron todos los campos
 			else
-			{
-				echo "<script> alert('¡Hemos mandado un mail a tu casilla, vuelve pronto!'); window.location.href = '" . base_url()."' </script>";
-				
-				//Testing
-				/*
+			{				
+				//Mostrarle la contraseña y el email al usuario
 				$user = $this->sesiones_model->getUser($_POST['email']);
 				$contra = reset($user)->passw;
-				echo "<script> alert('".$contra."'); </script>"; */
+				$email = reset($user)->email;
+				echo "<script> alert('Se ha recuperado la contraseña: ".$contra." para el email ".$email."'); window.location.href = '" . base_url()."'; </script>";
 			}
 	}
 
