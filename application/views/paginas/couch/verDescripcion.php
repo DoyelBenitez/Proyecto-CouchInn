@@ -1,18 +1,19 @@
 
 
 <div class="container" style="text-align center">
-	<div class="form-group col-md-offset-4 col-md-8">
+	<div class="">
 		<br>
-		<h1> <?php echo $title; ?> </h1>
+		<div class="text-center">
+		<h1> <?php echo $title; ?> </h1></div>
 		<br>
 			 <?php foreach ($couchs as $couch) { ?>
-			 	
+			 <div class="text-center">	
 			 	<p> <?php echo $couch->descripcion ?>.</p>
 			 	
-			 	<ul class="list group">	
+			 
 					<li> Puntaje promedio: <?php echo $couch->Porcentaje ?>.</li>
 					<li> Capacidad: <?php echo $couch->capacidad ?> persona/s.</li>
-				 </ul>
+				</div>
 			<?php } ?>
 	</div>
 </div>

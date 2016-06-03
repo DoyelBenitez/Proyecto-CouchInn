@@ -35,9 +35,9 @@
 		
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
+						<input type="text" class="form-control" placeholder="Busqueda...">
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
+					<button type="submit" class="btn btn-default">Buscar</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<?php
