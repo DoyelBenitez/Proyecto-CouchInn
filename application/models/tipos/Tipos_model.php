@@ -8,20 +8,20 @@ class Tipos_Model extends CI_Model {
 
 
 	public function getTiposDeHospedaje(){
-            $query = $this->db->query('SELECT * FROM tipo_de_couch');
+            $query = $this->db->query("SELECT * FROM tipo_de_couch WHERE tipo_de_couch.estado = 'normal'");
             return $query->result();
       }
 
       public function existeTipo($idTipo)
       {
-            $sentence = "SELECT t.tipo FROM tipo_de_couch t WHERE t.id_tipo = ?";
+            $sentence = "SELECT t.tipo FROM tipo_de_couch t WHERE t.id_tipo = ? and t.estado = 'normal'";
             $query = $this->db->query($sentence,array($idTipo));
             return $query->result();
       }
 
       public function existeNombreTipo($idTipo)
       {
-            $sentence = "SELECT t.tipo FROM tipo_de_couch t WHERE t.tipo = ?";
+            $sentence = "SELECT t.tipo FROM tipo_de_couch t WHERE t.tipo = ? and t.estado = 'normal' ";
             $query = $this->db->query($sentence,array($idTipo));
             return $query->result();
       }
@@ -30,7 +30,7 @@ class Tipos_Model extends CI_Model {
 	public function agregarTipoDeHospedaje($tipo)
 	{
 		if (empty($this->existeNombreTipo($tipo))) {
-				$sentence = "INSERT INTO `couchInn`.`tipo_de_couch` (`id_tipo`, `tipo`) VALUES (NULL, ? )";
+				$sentence = "INSERT INTO `couchInn`.`tipo_de_couch` (`id_tipo`, `tipo`, `estado`) VALUES (NULL, ? , 'normal' )";
 				$query = $this->db->query($sentence,array($tipo));
 		}
 		else{
@@ -41,7 +41,7 @@ class Tipos_Model extends CI_Model {
 	public function eliminarTipoDeHospedaje($idTipo)
       {
             if (!empty($this->existeTipo($idTipo))) {
-                  $sentence = "DELETE FROM `couchInn`.`tipo_de_couch` WHERE `id_tipo` = ?";
+                  $sentence = "UPDATE `couchInn`.`tipo_de_couch` SET estado = 'borrado' WHERE `id_tipo` = ?";
                   $query = $this->db->query($sentence,array($idTipo));
             }
             else{
@@ -52,7 +52,7 @@ class Tipos_Model extends CI_Model {
       public function modificarTipoDeHospedaje($idTipo,$tipoNuevo)
       {
             if (!empty($this->existeTipo($idTipo))) {
-      	     $sentence = "UPDATE  `couchInn`.`tipo_de_couch` SET  `tipo` =  ? WHERE  `tipo_de_couch`.`id_tipo` = ?";
+      	     $sentence = "UPDATE  `couchInn`.`tipo_de_couch` SET  `tipo` =  ? WHERE  `tipo_de_couch`.`id_tipo` = ? and tipo_de_couch.estado ='normal'";
       	     $query = $this->db->query($sentence, array($tipoNuevo,$idTipo));
             }
       }

@@ -7,27 +7,32 @@ class Sesiones_Model extends CI_Model {
 	}
 
 	public function getUser($email){
-		$sentence = 'SELECT * FROM usuario u WHERE u.email = ? ';
+		$sentence = "SELECT * FROM usuario u WHERE u.email = ? and u.estado = 'normal' ";
 		$query = $this->db->query($sentence,array($email));
 		return $query->result();
 	}
 
 	public function getUserWithPass($email,$passw){
-		$sentence = 'SELECT * FROM usuario u WHERE u.email = ? and u.passw = ? ';
+		$sentence = "SELECT * FROM usuario u WHERE u.email = ? and u.passw = ? and u.estado = 'normal'";
 		$query = $this->db->query($sentence,array($email,$passw));
 		return $query->result();
 	}
 
-	public function makeUserPremium($email)
-	{
-		$sentence = "UPDATE  `couchInn`.`usuario` SET  `tipo` =  'premium' WHERE  `usuario`.`email` = ? ;";
-		$query = $this->db->query($sentence,array($email));	
+	public function getPassw($email){       
+		$sentence = "SELECT u.passw FROM usuario u WHERE u.email = ? and u.estado = 'normal' ";
+		$query = $this->db->query($sentence, array($email));
 	}
 
-	public function getPassw($email)
-	{       
-		$sentence = 'SELECT u.passw FROM usuario u WHERE u.email = ? ';
-		$query = $this->db->query($sentence, array($email));
+	public function eliminarUsuario($email)
+	{
+		$sentece = "UPDATE  `couchInn`.`usuario` SET  `estado` =  'borrado' WHERE  `usuario`.`email` = ? ;";
+		$query = $this->db->query($sentence,array($email));
+	}
+
+	public function recuperarUsuario($email)
+	{
+		$sentece = "UPDATE  `couchInn`.`usuario` SET  `estado` =  'normal' WHERE  `usuario`.`email` = ? ;";
+		$query = $this->db->query($sentence,array($email));		
 	}
 
 	public function agregarUsuario($arrayDatos)
@@ -41,10 +46,11 @@ class Sesiones_Model extends CI_Model {
 								`passw` ,
 								`telefono` ,
 								`fecha_nacimiento` ,
-								`tipo`
+								`tipo` ,
+								`estado`
 								)
 								VALUES (
-								NULL ,?,?,?,?,?,?,?
+								NULL ,?,?,?,?,?,?,?,'normal'
 								);";
 				$query = $this->db->query($sentence,$arrayDatos);
 			}
@@ -59,6 +65,12 @@ class Sesiones_Model extends CI_Model {
 		if(!empty($usuario['telefono'])) $this->setTelefono($usuario['telefono'],$email);
 		if(!empty($usuario['fecha_nacimiento'])) $this->setFechaDeNacimiento($usuario['fecha_nacimiento'],$email);
 
+	}
+
+	public function makeUserPremium($email)
+	{
+		$sentence = "UPDATE  `couchInn`.`usuario` SET  `tipo` =  'premium' WHERE  `usuario`.`email` = ? and `usuario`.estado = 'normal';";
+		$query = $this->db->query($sentence,array($email));	
 	}
 
 	public function setNombre($nombre,$email)
