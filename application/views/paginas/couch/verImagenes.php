@@ -1,3 +1,8 @@
+<?php 
+		//Me quedo con el tipo y el nombre de usuario que esta logueado
+		$usuarioTipo = $this->session->userdata('tipo');
+		$usuarioNombre = $this->session->userdata('nombre');
+	 ?>
 <div class="container">
 	<div class="  form-horizontal">
 
@@ -9,9 +14,13 @@
 	</div>
 </div>
 
-<div>
-	<center><input type="submit" value="reservar(NO FUNCIONA)" class="btn btn-default"/></center>
-</div>
+<?php if(!empty($usuarioTipo)) { ?>
+		<div>
+		<center><input type="submit" value="reservar(NO FUNCIONA)" class="btn btn-default"/></center>
+		</div>
+
+<?php 
+	} ?>
 
 
 

@@ -63,7 +63,7 @@ class Recuperar extends CI_Controller {
 	{
 		//Función que checkea que exista el usuario con la contraseña que ingresó en la base
 		$usuario = $this->sesiones_model->getUser($email);
-		if (empty($usuario))
+		if (empty($usuario))	
 		{
 			//Si no existe imprimo el mensaje siguiente:
 			$this->form_validation->set_message('existeUsuario','El email ingresado no se encuentra registrado en el sistema.');

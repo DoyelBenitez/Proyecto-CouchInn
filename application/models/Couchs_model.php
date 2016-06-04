@@ -28,6 +28,17 @@ class Couchs_Model extends CI_Model {
 
         public function getTipoOfCouch($id_couch)
         {
-                $query = $this->db->query('SELECT t.tipo FROM couch c inner join tipo_de_couch t WHERE c.id_couch = ? ', array($id_couch));
+                $query = $this->db->query('SELECT t.tipo, t.id_tipo FROM couch c inner join tipo_de_couch t WHERE c.id_tipo = ? ', array($id_couch));
+                 return $query->result();
+        }
+
+        public function getUserData($id_usuario){
+                $query = $this->db->query("SELECT tipo FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
+                return $query->result();
+        }
+
+         public function getUserNom($id_usuario){
+                $query = $this->db->query("SELECT nombre FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
+                return $query->result();
         }
 }

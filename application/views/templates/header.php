@@ -35,9 +35,9 @@
 		
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Busqueda...">
+						<input type="hidden" class="form-control" placeholder="Busqueda...">
 					</div>
-					<button type="submit" class="btn btn-default">Buscar</button>
+				<!--	<button type="submit" class="btn btn-default">Buscar</button>-->
 				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<?php
@@ -79,7 +79,7 @@
 					        	if ($usuarioTipo == 'admin') {
 					        		echo '<li class="dropdown-header">Admin</li>';
 					        		echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
-				     				echo '<li><a href="#">Eliminar usuario</a></li>';
+				     			/*	echo '<li><a href="#">Eliminar usuario</a></li>'; */
 					        	}
 					        ?> 
 
@@ -111,7 +111,7 @@
 
 		<!-- Boton para ir atras: -->
 		<?php
-			$currentURL = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		/*	$currentURL = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			if ( $currentURL != base_url())
 			{
 				if(!empty($_SERVER['HTTP_REFERER']))
@@ -119,7 +119,7 @@
 					$referer = $_SERVER['HTTP_REFERER'];
 					echo '<a href="'.$referer.'" style= "text-align:center" class="btn btn-default"> Ir atrás </a>';
 				}
-			}
+			}*/
 		?>
 
 

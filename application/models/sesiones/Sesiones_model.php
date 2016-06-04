@@ -102,5 +102,10 @@ class Sesiones_Model extends CI_Model {
 		$sentence = "UPDATE  `couchInn`.`usuario` SET  `fecha_nacimiento` =  ? WHERE  `usuario`.`email` = ?;";
 		$query = $this->db->query($sentence,array($fecha_nacimiento,$email));
 	}
+
+	public function getUserData($id_usuario){
+		$query = $this->db->query("SELECT * FROM usuario WHERE usuario.estado = 'normal' and usuario.id_couch = ? ", array($id_couch));
+        	return $query->result();
+	}
 		
 }

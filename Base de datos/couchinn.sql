@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2016 a las 06:02:03
+-- Tiempo de generación: 04-06-2016 a las 07:38:37
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.21
 
@@ -36,17 +36,19 @@ CREATE TABLE `couch` (
   `capacidad` smallint(6) NOT NULL,
   `imagen` char(100) NOT NULL,
   `id_reserva` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id_usuario` int(11) NOT NULL,
+  `estado` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `couch`
 --
 
-INSERT INTO `couch` (`id_couch`, `titulo`, `descripcion`, `id_tipo`, `fecha`, `Porcentaje`, `capacidad`, `imagen`, `id_reserva`, `id_usuario`) VALUES
-(1, 'Casa en el Lago', 'Es una casa grande que se encuentra junto al lago, ideal para la familia', 10, '2016-05-03', '50%', 3, 'imagenes/couchs/lakeHouse.jpg\n\n\n\n\nÿÛ?C', 1, 1),
-(2, 'Departamento', 'Departamento lujoso', 20, '2016-05-17', '20%', 1, 'imagenes/couchs/dpto.jpg', 2, 2),
-(3, 'Choza', 'Choza de africa', 30, '2016-05-04', '10%', 10, 'imagenes/couchs/choza.jpg', 3, 3);
+INSERT INTO `couch` (`id_couch`, `titulo`, `descripcion`, `id_tipo`, `fecha`, `Porcentaje`, `capacidad`, `imagen`, `id_reserva`, `id_usuario`, `estado`) VALUES
+(1, 'Casa en el Lago', 'Es una casa grande que se encuentra junto al lago, ideal para la familia', 1, '2016-05-03', '50%', 3, 'imagenes/couchs/lakeHouse.jpg\n\n\n\n\nÿÛ?C', 1, 1, 'normal'),
+(2, 'Departamento', 'Departamento lujoso', 2, '2016-05-17', '20%', 1, 'imagenes/couchs/dpto.jpg', 2, 2, 'normal'),
+(3, 'Casa', 'Linda casa para pasar el verano.', 3, '2016-05-04', '10%', 10, 'imagenes/couchs/casa.jpg', 3, 3, 'normal'),
+(4, 'Habitacion', 'Se alquila por noche muy amplio con vista al mar', 4, '2016-06-01', '34%', 2, 'imagenes/couchs/habitacion.jpg', 4, 5, 'normal');
 
 -- --------------------------------------------------------
 
@@ -71,9 +73,12 @@ INSERT INTO `imagenes_couchs` (`id_img`, `id_couch`, `imagen`) VALUES
 (4, '2', 'imagenes/couchs/dpto.jpg'),
 (5, '2', 'imagenes/couchs/dpto2.jpg'),
 (6, '2', 'imagenes/couchs/dpto.jpg'),
-(7, '3', 'imagenes/couchs/choza.jpg'),
-(8, '3', 'imagenes/couchs/choza2.jpg'),
-(9, '3', 'imagenes/couchs/choza3.jpg');
+(7, '3', 'imagenes/couchs/casa.jpg'),
+(8, '3', 'imagenes/couchs/casa1.jpg'),
+(9, '3', 'imagenes/couchs/casa2.jpg'),
+(10, '4', 'imagenes/couchs/habitacion.jpg'),
+(11, '4', 'imagenes/couchs/habitacion1.jpg'),
+(12, '4', 'imagenes/couchs/habitacion2.jpg');
 
 -- --------------------------------------------------------
 
@@ -83,18 +88,19 @@ INSERT INTO `imagenes_couchs` (`id_img`, `id_couch`, `imagen`) VALUES
 
 CREATE TABLE `tipo_de_couch` (
   `id_tipo` int(11) NOT NULL,
-  `tipo` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `tipo` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `estado` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipo_de_couch`
 --
 
-INSERT INTO `tipo_de_couch` (`id_tipo`, `tipo`) VALUES
-(15, 'cabana'),
-(17, 'departamento'),
-(22, 'habitacion'),
-(24, 'depto');
+INSERT INTO `tipo_de_couch` (`id_tipo`, `tipo`, `estado`) VALUES
+(1, 'cabaña', 'normal'),
+(2, 'departamento', 'normal'),
+(3, 'casa', 'normal'),
+(4, 'Habitacion', 'normal');
 
 -- --------------------------------------------------------
 
@@ -110,17 +116,21 @@ CREATE TABLE `usuario` (
   `passw` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `telefono` int(20) NOT NULL,
   `fecha_nacimiento` date NOT NULL,
-  `tipo` varchar(7) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `tipo` varchar(7) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `estado` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tipo puede ser ''admin'',''comun'' o ''premium''';
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `passw`, `telefono`, `fecha_nacimiento`, `tipo`) VALUES
-(1, 'nahu', 'apa', 'nahuapa@altomail.com', 'contra', 4841234, '1994-05-01', 'comun'),
-(2, 'el', 'adminCapo', 'admin@mail.com', 'admin', 12345678, '1990-05-02', 'admin'),
-(3, 'doyel', 'benitez', 'doyel@hotmail.com', '12345', 6054429, '2016-05-25', 'admin');
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `passw`, `telefono`, `fecha_nacimiento`, `tipo`, `estado`) VALUES
+(1, 'userComun', '.', 'comun@hotmail.com', '12345', 22156921, '2016-03-08', 'comun', 'normal'),
+(2, 'userPremium', 'ape', 'premium@hotmail.com', '12345', 221569223, '2016-06-09', 'premium', 'normal'),
+(3, 'userPremium2', 'ape', 'premium2@hotmail.com', '12345', 221457382, '2016-06-15', 'premium', 'normal'),
+(4, 'useAdmin', 'ape', 'admin@hotmail.com', '12345', 221543256, '2016-06-15', 'admin', 'normal'),
+(5, 'userComun2', 'ape', 'comun2@hotmail.com', '12345', 221456434, '2016-06-13', 'comun', 'normal'),
+(7, 'Doyel', 'Benitez', 'prueba@hotmail.com', '12345', 2147483647, '1994-07-28', 'comun', 'normal');
 
 --
 -- Índices para tablas volcadas
@@ -158,22 +168,22 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `couch`
 --
 ALTER TABLE `couch`
-  MODIFY `id_couch` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_couch` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `imagenes_couchs`
 --
 ALTER TABLE `imagenes_couchs`
-  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `tipo_de_couch`
 --
 ALTER TABLE `tipo_de_couch`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
