@@ -110,8 +110,12 @@
 		
 
 		<!-- Boton para ir atras: -->
+
 		<?php
-		/*	$currentURL = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		
+		 /*
+			$currentURL = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+>>>>>>> origin/codigo
 			if ( $currentURL != base_url())
 			{
 				if(!empty($_SERVER['HTTP_REFERER']))
