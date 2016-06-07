@@ -10,8 +10,8 @@
 		<br>
 
 		<!-- Tipo de tarjeta -->
-		<label for="sel1">Selccione la compañía de su tarjeta (seleccione una):</label>
-		<select class="form-control" name="compania">
+		<label for="compania">Selccione la compañía de su tarjeta (seleccione una):</label>
+		<select class="form-control" name="compania" >
 			<option>Visa</option>
 			<option>Master Card</option>
 			<option>Santander</option>
@@ -21,7 +21,7 @@
 
 		<!-- Número de tarjeta -->
 		<label for="tarjeta"> Número de tarjeta: </label>
-		<input type="text" name="tarjeta" value="" class="form-control" placeholder="Número de su tarjeta de crédito, (16 números sin espacios)" size="50" maxlength="16" />
+		<input type="text" name="tarjeta" value="<?php if(isset($_POST['tarjeta'])) echo $_POST['tarjeta']; ?>" class="form-control" placeholder="Número de su tarjeta de crédito, (16 números sin espacios)" size="50" maxlength="16" />
 		
 			<?php if(!empty(form_error('tarjeta'))){
 				echo '<div class="alert alert-danger">';
@@ -33,7 +33,7 @@
 
 		<!-- Número de seguridad -->
 		<label for="pin"> Número de pin de seguridad: </label>
-		<input type="text" name="pin" value="" class="form-control" placeholder="Número de pin de tarjeta de crédito, (3 números sin espacios)" size="50" maxlength="3" />
+		<input type="text" name="pin" value="<?php if(isset($_POST['pin'])) echo $_POST['pin']; ?>" class="form-control" placeholder="Número de pin de tarjeta de crédito, (3 números sin espacios)" size="50" maxlength="3" />
 		
 			<?php if(!empty(form_error('pin'))){
 				echo '<div class="alert alert-danger">';
@@ -45,7 +45,7 @@
 
 
 		<label for="fecha_ven"> Fecha de Vencimiento de la Tarjeta: </label>
-		<input type="date" name="fecha_ven" step="1" min="1900-01-01" max="<?php //echo date("Y-m-d");?>" class="form-control">	
+		<input type="date" name="fecha_ven" value="<?php if(isset($_POST['fecha_ven'])) echo $_POST['fecha_ven']; ?>" step="1" min="1900-01-01" max="<?php //echo date("Y-m-d");?>" class="form-control">	
 			
 			<?php if(!empty(form_error('fecha_ven'))){
 					echo '<div class="alert alert-danger">';

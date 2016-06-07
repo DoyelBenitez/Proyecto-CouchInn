@@ -36,9 +36,10 @@ class ComprarPremium extends CI_Controller {
 	     	$data['page_header'] = '';
 
 	     	//Reglas de validacion
-	     	$this->form_validation->set_rules('compania', 'código de seguridad', 'required');
+	     	$this->form_validation->set_rules('compania', 'compania', 'required');
 	     	$this->form_validation->set_rules('tarjeta', 'número de tarjeta', 'min_length[16]|required|numeric' );
 	     	$this->form_validation->set_rules('pin', 'código de seguridad', 'min_length[3]|required|numeric');
+	     	$this->form_validation->set_rules('fecha_ven', 'fecha de vencimiento', 'required');
 
 			//Si no se pasó la validación
 			if ($this->form_validation->run() == FALSE) {

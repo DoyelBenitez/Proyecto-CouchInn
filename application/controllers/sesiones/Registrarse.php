@@ -90,7 +90,7 @@ class Registrarse extends CI_Controller {
 	public function existeUsuario($email)
 	{
 		//Función que checkea que exista el usuario con la contraseña que ingresó en la base
-		if (!empty($this->sesiones_model->getUserWithPass($email,$_POST['passw']))) 
+		if (!empty($this->sesiones_model->getUser($email))) 
 		{
 			//Si no existe imprimo el mensaje siguiente:
 			$this->form_validation->set_message('existeUsuario','El usuario ya existe.');
