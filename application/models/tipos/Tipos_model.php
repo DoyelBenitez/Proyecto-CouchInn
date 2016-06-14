@@ -26,6 +26,13 @@ class Tipos_Model extends CI_Model {
 		return $query->result();
 	}
 
+	public function getIdTipo($tipo)
+	{
+		$sentence = "SELECT t.id_tipo FROM tipo_de_couch t WHERE t.tipo = ? and t.estado = 'normal' ";
+		$query = $this->db->query($sentence,array($tipo));
+		return $query->result();
+	}
+
 
 	public function agregarTipoDeHospedaje($tipo)
 	{

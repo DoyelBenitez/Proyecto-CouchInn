@@ -1,0 +1,32 @@
+
+<div class="container" >
+	<ul class="list-group">
+		<?php if(empty($couchs)) echo '<li class="list-group-item" style="text-align:center"> No has agregado ningun couch todavia </li>'  ?>
+		<?php foreach ($couchs as $key => $couch) { ?>
+			
+			<li class="list-group-item"><?php echo ($key+1).'. '; echo $couch->titulo ?>
+				<input type="hidden" name="id_couch" id="id_couch" value="<?php echo $couch->id_couch; ?>">
+
+
+
+			</li>
+
+			<form method="post" action="<?php echo site_url('index.php/couch/eliminarCouch/'); ?>">
+				<input type="hidden" name="id_couch" id="id_couch" value="<?php echo ($couch->id_couch); ?>">
+				<input type="submit" <?php echo 'onclick="confirmacionEliminar(event)"'; ?> class="btn btn-default" value="Eliminar">
+			</form>
+
+		<?php } ?>
+
+
+		<script>
+			function confirmacionEliminar(event) {
+				debugger;
+				if(!confirm('¿Seguro que quiere eliminar el couch?')){
+					event.preventDefault();
+				}
+			}
+			</script>
+	</ul>
+</div>
+<br>

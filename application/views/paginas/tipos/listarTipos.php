@@ -14,14 +14,25 @@
 				<h4><?php echo $key.'. ' . $tipo->tipo?></h4>
 
 				<form method="link" action="<?php echo site_url('index.php/tipos/eliminarTipo/').'/'.$tipo->id_tipo; ?>">
-					<input type="submit" class="btn btn-default" value="Eliminar">
+					<input type="submit" <?php if (!$couchsPorTipo[$tipo->tipo]) echo 'onclick="confirmacionEliminar(event)"'; ?> class="btn btn-default" value="Eliminar">
 				</form>
+
 				<form method="link" action="<?php echo site_url('index.php/tipos/modificarTipo/').'/'.$tipo->id_tipo; ?>">
 					<input type="submit" class="btn btn-default" value="Modificar">
 				</form>
 
 			</li>
-		<?php } 
-		?>	
+		<?php }
+
+		?>
+
+			<script>
+			function confirmacionEliminar(event) {
+				debugger;
+				if(!confirm('¡Este tipo tiene couchs asociados! ¿Desea eliminarlo igual?')){
+					event.preventDefault();
+				}
+			}
+			</script>	
 	</ul>
 </div>
