@@ -38,7 +38,15 @@ class ListarTipos extends CI_Controller {
         {
 			$data['title'] = 'Listar tipos';
 			$data['page_header'] = '';
-			$data['tipos'] = $this->tipos_model->getTiposDeHospedaje();
+			$tipos = $this->tipos_model->getTiposDeHospedaje();
+			$data['tipos'] = $tipos;
+
+			$couchsPorTipo = array();
+			foreach ($tipos as $tipo) {
+				$couchsPorTipo[$tipo->tipo] = empty($this->tipos_model->couchsConTipo($tipo->id_tipo));
+			}
+
+			$data['couchsPorTipo'] = $couchsPorTipo;
 
 			$this->load->view('templates/header.php', $data);
 			$this->load->view('paginas/tipos/listarTipos',$data);

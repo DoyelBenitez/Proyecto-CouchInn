@@ -25,8 +25,8 @@
 				</button>
 
 				<a class="navbar-brand" href="<?php echo site_url(); ?>" >
-        			<img alt="Brand" src="<?php echo site_url('imagenes/logoChico.png'); ?>" width="28" height="25">
-      			</a>
+					<img alt="Brand" src="<?php echo site_url('imagenes/logoChico.png'); ?>" width="28" height="25">
+				</a>
 
 			</div>
 
@@ -64,33 +64,46 @@
 							if(!empty($usuarioTipo)){
 								echo '('.$usuarioTipo.')'; echo '<b class="caret"></b></a>';
 							} 
-					        echo '<ul class="dropdown-menu">';
-					     ?>   
-					        <!-- Opciones de todos -->
+							echo '<ul class="dropdown-menu">';
+						 ?>   
+							<!-- Opciones de todos -->
 							<?php 
-					        	if (!empty($usuarioTipo)) {
-					        		echo '<li class="dropdown-header">Cuenta</li>';
-					        		echo '<li><a href="'.site_url('index.php/sesiones/modificarCuenta').'"> Modificar datos de cuenta </a></li>';
-					        	}
-					         ?> 
+								if (!empty($usuarioTipo)) {
+									echo '<li class="dropdown-header">Cuenta</li>';
+									echo '<li><a href="'.site_url('index.php/sesiones/modificarCuenta').'"> Modificar datos de cuenta </a></li>';
+								}
+							 ?> 
+							
+							<!-- Separador para opciones de usuarios especificos -->
+							<li role="separator" class="divider"></li>
 
-					        <!-- Opciones del admin -->
-					        <?php 
-					        	if ($usuarioTipo == 'admin') {
-					        		echo '<li class="dropdown-header">Admin</li>';
-					        		echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
-				     			/*	echo '<li><a href="#">Eliminar usuario</a></li>'; */
-					        	}
-					        ?> 
+							<!-- Opciones del admin -->
+							<?php 
+								if ($usuarioTipo == 'admin') {
+									echo '<li class="dropdown-header">Admin</li>';
+									echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
+								/*	echo '<li><a href="#">Eliminar usuario</a></li>'; */
+								}
+							?> 
 
-					        <!-- Opciones del usuario comun -->
-					        <?php 
-					        	if ($usuarioTipo == 'comun') {
-					        		echo '<li><a href="'.site_url('index.php/sesiones/comprarPremium').'"> Pasarse a PREMIUM</a></li>';
-					        	}
-					           
+							<!-- Opciones premium o comun (Para couchs)-->
+							<?php 
+								if (($usuarioTipo == 'comun') or ($usuarioTipo == 'premium')) {
+									echo '<li class="dropdown-header">Couchs</li>';
+									echo '<li> <a href= "'.site_url('index.php/couch/agregarCouch').'"> Agregar un Couch</a></li>';
+									echo '<li> <a href= "'.site_url('index.php/couch/listarCouchsDeUsuario').'"> Mis Couchs</a></li>';
+								}
+							 ?>
 
-					        echo '</ul>';
+							<!-- Opciones del usuario comun -->
+							<?php 
+								if ($usuarioTipo == 'comun') {
+									echo '<li class="dropdown-header">Premium</li>';
+									echo '<li><a href="'.site_url('index.php/sesiones/comprarPremium').'"> Pasarse a PREMIUM</a></li>';
+								}
+							   
+
+							echo '</ul>';
 						echo '</li>';
 					}
 					?>
@@ -106,7 +119,6 @@
 		<a href="<?php echo site_url(); ?>">
 		<p style="text-align=center;"><img src="<?php echo site_url('imagenes/logo.png'); ?>" width="800" height="200" ></p>
 		</a>
-		<h1><?php echo $page_header; ?></h1>
 		
 
 		<!-- Boton para ir atras: -->

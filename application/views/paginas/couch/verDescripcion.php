@@ -17,7 +17,7 @@
 			 	<p> <?php echo $couch->descripcion ?>.</p>
 			 	
 			 
-					<li> Puntaje promedio: <?php echo $couch->Porcentaje ?>.</li>
+					<li> Puntaje promedio: <?php //echo $couch->Porcentaje ?>.</li>
 					<li> Capacidad: <?php echo $couch->capacidad ?> persona/s.</li>
 					<li> Localidad: <?php echo $couch->localidad ?> </li>
 					<?php
@@ -39,7 +39,7 @@
 			<?php } ?>
 			
 			 <div class="text-center">	
-			<h3>Publico <?php echo $usuario?></h3>
+			<h3>Publicado por: <?php echo $usuario?></h3>
 			</div>
 	</div>
 </div>

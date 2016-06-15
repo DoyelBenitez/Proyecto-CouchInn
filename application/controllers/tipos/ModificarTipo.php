@@ -64,7 +64,7 @@ class ModificarTipo extends CI_Controller {
 	     		$tipo = $_POST['tipoViejo'];
 	     		$tipoNuevo = strtolower($_POST['tipo']);
 		   		$this->tipos_model->modificarTipoDeHospedaje($tipo,$tipoNuevo);	
-		     	echo "<script> alert('El tipo ha sido modificado por satisfactoriamente'); window.location.href = '" . base_url() . "index.php/tipos/listarTipos'; </script>";
+		     	echo "<script> alert('El tipo ha sido modificado satisfactoriamente'); window.location.href = '" . base_url() . "index.php/tipos/listarTipos'; </script>";
 	     	}
 		}
      }

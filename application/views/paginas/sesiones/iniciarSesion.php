@@ -6,7 +6,7 @@
 		<br>
 		
 		<label for="email"> Email: </label>
-		<input type="text" name="email" value="" class="form-control" placeholder="Ej: nombre@mail.com" size="50" maxlength="70" />
+		<input type="text" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>" class="form-control" placeholder="Ej: nombre@mail.com" size="50" maxlength="70" />
 		
 			<?php if(!empty(form_error('email'))){
 				echo '<div class="alert alert-danger">';
