@@ -1,26 +1,56 @@
-<?php 
-		//Me quedo con el tipo y el nombre de usuario que esta logueado
-		$usuarioTipo = $this->session->userdata('tipo');
-		$usuarioNombre = $this->session->userdata('nombre');
-	 ?>
+
 <div class="container">
 	<div class="  form-horizontal">
 
 		<?php 
-		foreach ($imagen as $couch) {
+		foreach ($imagen as $couch) { 
 
 				echo '<img src=" '. site_url($couch->imagen).' " align="left" alt="imagen"  style="height:300px;width:300px" HSPACE="40" class="img-rounded" VSPACE="30" >';
 		} ?>
 	</div>
 </div>
 
-<?php if(!empty($usuarioTipo)) { ?>
+<?php 
+		$aux = $this->session->userdata() ;
+		$usuarioTipo = $this->session->userdata('tipo');
+
+			
+	?>
+		
+<?php	if ((count($aux) > 1) & ($usuarioTipo != 'admin') ) { ?>
+	<!--	 <script> alert('ESTA LOGEADO') </script>  -->
+		 <?php  	
+		//Me quedo con el tipo y el nombre de usuario que esta logueado
+		$user = $this->session->userdata('email');
+		$user = $this->couchs_model->getId($user);
+		$user = reset($user)->id_usuario;
+		$id_usuario_imagen =reset($imagen)->id_usuario; 
+	/*	TEST  echo "<script> alert('ESSSS".$prueba."') </script>"; 
+		  echo "<script> alert('PAARA".$user."') </script>";  */?>
+<?php		if($user == $id_usuario_imagen) { ?>
+		
+	<!--	<script> alert('TIENE QUE APARECER VER RESERVAS') </script>" -->
+		<div>
+		<center><input type="submit" value="Ver_reservas(NO FUNCIONA)" class="btn btn-default"/></center>
+		</div>	
+
+<?php	} 
+		else { ?>
+
 		<div>
 		<center><input type="submit" value="reservar(NO FUNCIONA)" class="btn btn-default"/></center>
-		</div>
+		</div>	
 
-<?php 
+	<?php } ?>
+
+<?php	} 
+	else
+		{ 	
+	// echo "<script> alert('NO ESTA LOGEADO') </script>";
 	} ?>
+
+	
+
 
 
 

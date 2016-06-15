@@ -24,6 +24,7 @@ class Couchs_Model extends CI_Model {
         public function getUserOfCouch($id_couch)
         {
                 $query = $this->db->query('SELECT u.name FROM couch c inner join usuario u WHERE c.id_couch = ? ', array($id_couch));
+                return $query->result();
         }
 
         public function getTipoOfCouch($id_couch)
@@ -40,5 +41,15 @@ class Couchs_Model extends CI_Model {
          public function getUserNom($id_usuario){
                 $query = $this->db->query("SELECT nombre FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
                 return $query->result();
+        }
+
+        public function getUserData2($id_usuario){
+                $query = $this->db->query("SELECT u.nombre FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
+                return $query->result();
+        }
+
+        public function getId($email){
+        $query = $this->db->query("SELECT id_usuario FROM usuario WHERE usuario.estado = 'normal' and usuario.email = ? ", array($email));
+            return $query->result();
         }
 }

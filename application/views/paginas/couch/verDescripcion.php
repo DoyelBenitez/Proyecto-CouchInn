@@ -19,16 +19,18 @@
 			 
 					<li> Puntaje promedio: <?php echo $couch->Porcentaje ?>.</li>
 					<li> Capacidad: <?php echo $couch->capacidad ?> persona/s.</li>
+					<li> Localidad: <?php echo $couch->localidad ?> </li>
 					<?php
 						$tipo= $this->couchs_model->getTipoOfCouch($couch->id_tipo);
-    					
     					
       					?>
 
       				 <?php foreach ($tipo as $lop) {		;?>
 
       					<?php if ($lop->id_tipo == $couch->id_tipo){ ?>
-						<li>De tipo:  <?php echo $lop->tipo ?></li>
+						<li>De Tipo:  <?php echo $lop->tipo ?> </li>
+						
+						
 
 					<?php } ?>
 

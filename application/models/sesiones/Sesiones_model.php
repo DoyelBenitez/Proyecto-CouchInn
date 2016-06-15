@@ -107,5 +107,8 @@ class Sesiones_Model extends CI_Model {
 		$query = $this->db->query("SELECT * FROM usuario WHERE usuario.estado = 'normal' and usuario.id_couch = ? ", array($id_couch));
         	return $query->result();
 	}
-		
+	public function getId($email){
+		$query = $this->db->query("SELECT id_usuario FROM usuario WHERE usuario.estado = 'normal' and usuario.email = ? ", array($email));
+        	return $query->result();
+		}
 }

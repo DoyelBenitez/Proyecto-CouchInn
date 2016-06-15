@@ -34,7 +34,7 @@ class Recuperar extends CI_Controller {
 	     	$data['page_header'] = '';
 
 	     	//Reglas de validacion
-	     	$this->form_validation->set_rules('email', 'email', 'valid_email|required');
+	     	$this->form_validation->set_rules('email', 'email', 'valid_email|required|callback_existeUsuario');
 	     	//Regla del codigo 
 	     	//$this->form_validation->set_rules('pin', 'código de seguridad', 'min_length[3]|required|numeric');
 
