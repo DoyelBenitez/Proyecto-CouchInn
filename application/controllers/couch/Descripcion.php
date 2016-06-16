@@ -23,6 +23,7 @@ class Descripcion extends CI_Controller {
 		$data['title'] = reset($couch)->titulo;
 		$data['page_header'] = '';
 
+		//print_r($data['imagen'][0]->imagen);
 		$this->load->view('templates/header.php', $data);
 		$this->load->view('paginas/couch/verImagenes', $data);
 		$this->load->view('paginas/couch/verDescripcion', $data);
