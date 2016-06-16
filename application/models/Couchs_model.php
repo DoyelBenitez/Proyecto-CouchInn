@@ -7,13 +7,13 @@ class Couchs_Model extends CI_Model {
         }
 
         public function getCouchs(){
-        	$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal';");
-        	return $query->result();
+            $query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal';");
+            return $query->result();
         }
 
         public function getCouch($id_couch){ //Funcion que se usa para la descripcion de un couch
-        	$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = ? ", array($id_couch));
-        	return $query->result();
+            $query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = ? ", array($id_couch));
+            return $query->result();
         }
 
         public function getCouchImagenes($id_couch){ 
@@ -24,7 +24,6 @@ class Couchs_Model extends CI_Model {
         public function getUserOfCouch($id_couch)
         {
                 $query = $this->db->query('SELECT u.name FROM couch c inner join usuario u WHERE c.id_couch = ? ', array($id_couch));
-                return $query->result();
         }
 
         public function getTipoOfCouch($id_couch)
@@ -50,6 +49,61 @@ class Couchs_Model extends CI_Model {
 
         public function getId($email){
         $query = $this->db->query("SELECT id_usuario FROM usuario WHERE usuario.estado = 'normal' and usuario.email = ? ", array($email));
+            return $query->result();
+        }
+
+        public function agregarImagenACouch($id_couch,$ruta_imagen)
+        {
+            $sentence =
+            "INSERT INTO  `test`.`imagenes_couchs` (
+                        `id_img` ,
+                        `id_couch` ,
+                        `imagen`
+                        )
+                        VALUES (NULL ,  ?,  ?);";
+            $query = $this->db->query($sentence, array($id_couch,$ruta_imagen));
+        }
+
+        public function getCouchByName($titulo)
+        {
+            $query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.titulo = ? ", array($titulo));
+            return $query->result();
+        }
+
+        public function agregarCouch($couch)
+        {
+           $sentence =
+           "INSERT INTO  `test`.`couch` (
+                        `id_couch` ,
+                        `titulo` ,
+                        `descripcion` ,
+                        `capacidad` ,
+                        `localidad` ,
+                        `id_tipo` ,
+                        `id_usuario` ,
+                        `estado`
+                        )
+            VALUES (NULL ,  ?,  ?,  ?, ?,  ?,  ?,  'normal');";
+            $query = $this->db->query($sentence, $couch);
+        }
+
+        public function eliminarCouch($id_couch)
+        {
+            //Si existe el couch lo borro
+            if(!empty($this->getCouch($id_couch))){
+                $sentence = "UPDATE `test`.`couch` SET estado = 'borrado' WHERE `id_couch` = ?";
+                $query = $this->db->query($sentence, array($id_couch));
+            }
+            else
+            {
+                return NULL;
+            }
+        }
+
+        public function couchsDeUsuario($id_usuario)
+        {
+            $sentence = "SELECT * FROM couch WHERE couch.id_usuario = ? and couch.estado = 'normal';";
+            $query = $this->db->query($sentence, array($id_usuario));
             return $query->result();
         }
 }
