@@ -1,4 +1,4 @@
-<?php echo form_open_multipart('index.php/couch/modificarCouch');?>
+<?php echo form_open_multipart('index.php/couch/modificarCouch/'.$couch->id_couch);?>
 
 <div class="container" style="">
 	<div class="form-group col-md-offset-2 col-md-8">

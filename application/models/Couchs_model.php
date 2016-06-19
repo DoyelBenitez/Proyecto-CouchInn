@@ -6,8 +6,6 @@ class Couchs_Model extends CI_Model {
 				$this->load->database();
 		}
 
-		//DOYEL CACA ESTE MODELO TIENE UN PAR DE METODOS QUE NO SIRVEN PA PIJA O DEBERIAN ESTAR EN EL DE SESIONES >:(
-
 		public function getCouchs(){
 			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal';");
 			return $query->result();
@@ -47,6 +45,16 @@ class Couchs_Model extends CI_Model {
 				return $query->result();
 		}
 
+		public function getUserData2($id_usuario){
+				$query = $this->db->query("SELECT u.nombre FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
+				return $query->result();
+		}
+
+		public function getId($email){
+		$query = $this->db->query("SELECT id_usuario FROM usuario WHERE usuario.estado = 'normal' and usuario.email = ? ", array($email));
+			return $query->result();
+		}
+
 		public function agregarImagenACouch($id_couch,$ruta_imagen)
 		{
 			$sentence =
@@ -68,9 +76,18 @@ class Couchs_Model extends CI_Model {
 		public function agregarCouch($couch)
 		{
 			print_r(array_values($couch));
-			$sentence = "INSERT INTO `couchInn`.`couch` (
-				`id_couch`, `titulo`, `descripcion`, `capacidad`, `localidad`, `id_tipo`, `id_usuario`, `estado`) 
-				VALUES (NULL, ?,?,?,?,?,?,'normal');";
+		   	$sentence =
+		   	"INSERT INTO  `couchInn`.`couch` (
+						`id_couch` ,
+						`titulo` ,
+						`descripcion` ,
+						`capacidad` ,
+						`localidad` ,
+						`id_tipo` ,
+						`id_usuario` ,
+						`estado`
+						)
+			VALUES (NULL ,  ?,  ?,  ?, ?,  ?,  ?,  'normal');";
 			$query = $this->db->query($sentence, $couch);
 		}
 
@@ -78,7 +95,7 @@ class Couchs_Model extends CI_Model {
 		{
 			//Si existe el couch lo borro
 			if(!empty($this->getCouch($id_couch))){
-				$sentence = "UPDATE `couchInn`.`couch` SET estado = 'borrado' WHERE `id_couch` = ?";
+				$sentence = "UPDATE `test`.`couch` SET estado = 'borrado' WHERE `id_couch` = ?";
 				$query = $this->db->query($sentence, array($id_couch));
 			}
 			else
@@ -94,5 +111,24 @@ class Couchs_Model extends CI_Model {
 			return $query->result();
 		}
 
+		public function setComentario($comentario,$id_user_couch,$user_log)
+        {
+            $sentence =
+             "INSERT INTO `comentarios` (
+              `id_comentario` ,
+              `id_couch` ,
+              `id_usuario` ,
+              `comentario`
+                )
+            VALUES (NULL , ?, ?, ?);";
+            $query = $this->db->query($sentence, array($id_user_couch,$user_log,$comentario));
+        }
+
+        public function getComentarios($id_c)
+        {
+            $sentence = "SELECT * FROM comentarios WHERE id_couch = ?;";
+            $query = $this->db->query($sentence, array($id_c));
+            return $query->result();
+        }
 
 }

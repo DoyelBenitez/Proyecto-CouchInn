@@ -64,7 +64,7 @@ class ModificarCouch extends CI_Controller {
 				if ($this->form_validation->run() == FALSE) 
 				{
 					$this->load->view('templates/header.php', $data);
-					$this->load->view('paginas/couch/modificarCouch');
+					$this->load->view('paginas/couch/modificarCouch', $data);
 					$this->load->view('templates/footer.php', $data);
 				}
 				//Si ya se validaron todos los campos
@@ -115,7 +115,6 @@ class ModificarCouch extends CI_Controller {
 							'localidad'		=>	$localidad,
 							'id_tipo'		=>	$tipo,
 							'id_usuario'	=>	$couch[6],
-							'estado'		=>	$couch[7]
 							);
 						echo '///////';
 						print_r(array_values($couch));

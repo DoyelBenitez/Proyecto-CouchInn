@@ -7,34 +7,28 @@
 		<div class="text-center">
 		<h1> <?php echo $title; ?> </h1></div>
 		<br>
-			 <?php foreach ($couchs as $couch) { ?>
-			 	<?php   
-   						 $usuario= $this->couchs_model->getUserNom($couch->id_usuario);
-    					 $usuario = reset($usuario)->nombre;
+			 <?php
 
-					?>
+			 	//Me quedo con el nombre del usuario
+			 	$usuario = $usuario->nombre
+    			
+			 ?>
 			 <div class="text-center">	
 			 	<p> <?php echo $couch->descripcion ?>.</p>
 			 	
 			 
-					<li> Puntaje promedio: <?php //echo $couch->Porcentaje ?>.</li>
+					<li> Puntaje promedio: <?php //ACA HAY QUE CALCULAR PORCENTAJE ?>.</li>
 					<li> Capacidad: <?php echo $couch->capacidad ?> persona/s.</li>
+					<li> Localidad: <?php echo $couch->localidad ?> </li>
 					<?php
 						$tipo= $this->couchs_model->getTipoOfCouch($couch->id_tipo);
-    					
-    					
-      					?>
+    					$tipo = reset($tipo)->tipo	
+      				?>
 
-      				 <?php foreach ($tipo as $lop) {		;?>
+						<li>De Tipo:  <?php echo $tipo ?> </li>
 
-      					<?php if ($lop->id_tipo == $couch->id_tipo){ ?>
-						<li>De tipo:  <?php echo $lop->tipo ?></li>
 
-					<?php } ?>
-
-					<?php } ?>
 				</div>
-			<?php } ?>
 			
 			 <div class="text-center">	
 			<h3>Publicado por: <?php echo $usuario?></h3>
