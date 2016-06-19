@@ -36,14 +36,16 @@ class ListarCouchsDeUsuario extends CI_Controller {
 
 	 	//Me quedo con el id del usuario
 	 	$emailUsuario = $this->session->userdata('email');
-	 	print_r($emailUsuario);
-	 	$usuario = $this->sesiones_model->getUser($emailUsuario);
-		$id_usuario = reset($usuario)->id_usuario;
+	 	if(!empty($emailUsuario))
+	 	{
+		 	$usuario = $this->sesiones_model->getUser($emailUsuario);
+			$id_usuario = reset($usuario)->id_usuario;
 
-		$data['couchs'] = $this->couchs_model->couchsDeUsuario($id_usuario);
+			$data['couchs'] = $this->couchs_model->couchsDeUsuario($id_usuario);
 
-		$this->load->view('templates/header.php', $data);
-		$this->load->view('paginas/couch/listarCouchsDeUsuario',$data);
-		$this->load->view('templates/footer.php', $data);
+			$this->load->view('templates/header.php', $data);
+			$this->load->view('paginas/couch/listarCouchsDeUsuario',$data);
+			$this->load->view('templates/footer.php', $data);
+		}
 	 }
 }

@@ -6,6 +6,8 @@ class Couchs_Model extends CI_Model {
 				$this->load->database();
 		}
 
+		//DOYEL CACA ESTE MODELO TIENE UN PAR DE METODOS QUE NO SIRVEN PA PIJA O DEBERIAN ESTAR EN EL DE SESIONES >:(
+
 		public function getCouchs(){
 			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal';");
 			return $query->result();
@@ -23,7 +25,10 @@ class Couchs_Model extends CI_Model {
 
 		public function getUserOfCouch($id_couch)
 		{
-				$query = $this->db->query('SELECT u.name FROM couch c inner join usuario u WHERE c.id_couch = ? ', array($id_couch));
+				$query = $this->db->query('	SELECT u.email 
+											FROM couch c inner join usuario u on c.id_usuario = u.id_usuario
+											WHERE c.id_couch = ? ', array($id_couch));
+				return $query->result();
 		}
 
 		public function getTipoOfCouch($id_couch)
@@ -62,18 +67,10 @@ class Couchs_Model extends CI_Model {
 
 		public function agregarCouch($couch)
 		{
-		   $sentence =
-		   "INSERT INTO  `couchInn`.`couch` (
-						`id_couch` ,
-						`titulo` ,
-						`descripcion` ,
-						`capacidad` ,
-						`localidad` ,
-						`id_tipo` ,
-						`id_usuario` ,
-						`estado`
-						)
-			VALUES (NULL ,  ?,  ?,  ?, ?,  ?,  ?,  'normal');";
+			print_r(array_values($couch));
+			$sentence = "INSERT INTO `couchInn`.`couch` (
+				`id_couch`, `titulo`, `descripcion`, `capacidad`, `localidad`, `id_tipo`, `id_usuario`, `estado`) 
+				VALUES (NULL, ?,?,?,?,?,?,'normal');";
 			$query = $this->db->query($sentence, $couch);
 		}
 
