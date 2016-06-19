@@ -8,11 +8,12 @@ class Descripcion extends CI_Controller {
         $this->load->model('couchs_model');
         $this->load->model('sesiones/sesiones_model');
         $this->load->helper('url_helper');
+        $this->load->helper(array('form', 'url'));
         $this->load->library('session');
+        $this->load->library('form_validation');
      }	
 
 	public function index(){
-		
 
 		$id = $_POST['id_couch'];
 		
@@ -30,12 +31,44 @@ class Descripcion extends CI_Controller {
 		$data['usuario'] = reset($usuario);
 
 		$data['title'] = $couch->titulo;
-		$data['page_header'] = '';
+		
 
-		//print_r($data['imagen'][0]->imagen);
-		$this->load->view('templates/header.php', $data);
-		$this->load->view('paginas/couch/verImagenes', $data);
-		$this->load->view('paginas/couch/verDescripcion', $data);
-		$this->load->view('templates/footer.php', $data);
+		$this->form_validation->set_rules('comentarios', 'comentarios', 'min_length[1]');
+
+		if($this->form_validation->run() == TRUE and !empty($_POST['comentarios']))
+		{
+				$comentario = $_POST['comentarios'];
+				$id_user_couch = $_POST['id_couch'];
+				$aux = $this->session->userdata() ;
+				$usuarioTipo = $this->session->userdata('tipo');
+			
+			if ((count($aux) > 1))
+			{
+				$user_log = $this->session->userdata('email');
+				$user_log = $this->sesiones_model->getId($user_log);
+				$user_log = reset($user_log)->id_usuario;
+				$this->couchs_model->setComentario($comentario,$id_user_couch,$user_log);
+				$aux['$_POST'] = $_POST['id_couch'];
+				echo "<script> alert('Comentario agregado'); window.location.href = '" .base_url(). "';</script>";
+			}
+
+		}
+		else
+		{
+			$id = $_POST['id_couch'];
+			$data['page_header'] = '';
+			$data['comentarios'] = $this->couchs_model->getComentarios($id);
+
+			$this->load->view('templates/header.php', $data);
+			$this->load->view('paginas/couch/verImagenes', $data);
+			$this->load->view('paginas/couch/verDescripcion', $data);
+			$this->load->view('paginas/couch/verBotonComentar', $data);
+			$this->load->view('paginas/couch/ver_Comentarios', $data);
+			$this->load->view('templates/footer.php', $data);
+		
+		}	
+
+		
+
 	}
 }

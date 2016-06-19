@@ -41,7 +41,7 @@
 
 			<div>
 			<center><input type="submit" value="reservar(NO FUNCIONA)" class="btn btn-default"/></center>
-			</div>	
+			</div>
 
 		<?php 
 		} 
