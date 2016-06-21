@@ -40,7 +40,11 @@
 		{ ?>
 
 			<div>
-			<center><input type="submit" value="reservar(NO FUNCIONA)" class="btn btn-default"/></center>
+			<center>
+			<a href="<?php echo site_url('index.php/couch/reservarCouch/'.$couch->id_couch); ?>">
+			<button class="btn btn-default"> Reservar </button>
+			</a>
+		</center>
 			</div>
 
 		<?php 
