@@ -21,7 +21,7 @@
 					<div class="centro">
 					<span style="margin:50%;">
 					<?php   
-   						 $usuario= $this->couchs_model->getUserData($couch->id_usuario);
+   						 $usuario= $this->sesiones_model->getUserById($couch->id_usuario);
    						 
     					 $usuario = reset($usuario)->tipo;
      					 

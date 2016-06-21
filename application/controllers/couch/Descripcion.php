@@ -13,8 +13,8 @@ class Descripcion extends CI_Controller {
         $this->load->library('form_validation');
      }	
 
-	public function index(){
-
+	public function index()
+	{
 		$id = $_POST['id_couch'];
 		
 		//Me quedo con las imagenes del couch
@@ -29,46 +29,52 @@ class Descripcion extends CI_Controller {
 		//Me quedo con el usuario que publico el couch
 		$usuario = $this->sesiones_model->getUserById($couch->id_usuario);
 		$data['usuario'] = reset($usuario);
-
 		$data['title'] = $couch->titulo;
+
 		
-
-		$this->form_validation->set_rules('comentarios', 'comentarios', 'min_length[1]');
-
-		if($this->form_validation->run() == TRUE and !empty($_POST['comentarios']))
-		{
+			$this->form_validation->set_rules('comentarios', 'comentarios', 'min_length[3]');	
+			if($this->form_validation->run() == TRUE and !empty($_POST['comentarios']))
+			{
 				$comentario = $_POST['comentarios'];
 				$id_user_couch = $_POST['id_couch'];
 				$aux = $this->session->userdata() ;
 				$usuarioTipo = $this->session->userdata('tipo');
 			
-			if ((count($aux) > 1))
-			{
-				$user_log = $this->session->userdata('email');
-				$user_log = $this->sesiones_model->getId($user_log);
-				$user_log = reset($user_log)->id_usuario;
-				$this->couchs_model->setComentario($comentario,$id_user_couch,$user_log);
-				$aux['$_POST'] = $_POST['id_couch'];
-				echo "<script> alert('Comentario agregado'); window.location.href = '" .base_url(). "';</script>";
+				if ((count($aux) > 1))
+				{
+					$user_log = $this->session->userdata('email');
+					$user_log = $this->sesiones_model->getId($user_log);
+					$user_log = reset($user_log)->id_usuario;
+					$this->couchs_model->setComentario($comentario,$id_user_couch,$user_log);
+					$aux['$_POST'] = $_POST['id_couch'];
+					echo "<script> alert('Comentario agregado'); window.location.href = '" .base_url(). "';</script>";
+				}
+
 			}
-
+			else
+			{
+				if(!empty($_POST['booleano']))// si booleano existe quiere decir que se apreto ver mas comentarios
+				{
+					$id = $_POST['id_couch'];
+					$data['page_header'] = '';
+					$data['comentarios'] = $this->couchs_model->getComentarios($id);
+					$data['estado'] = "TRUE";
+				}
+				else
+				{// si no labura normalmente mostrandote 10 comentarios
+					$_POST['booleano'] = "FALSE";
+					$id = $_POST['id_couch'];
+					$data['id_couch'] = $id;
+					$data['page_header'] = '';
+					$data['comentarios'] = $this->couchs_model->getComentarios($id);
+					$data['estado'] = "FALSE";
+				}
+				$this->load->view('templates/header.php', $data);
+				$this->load->view('paginas/couch/verImagenes', $data);		
+				$this->load->view('paginas/couch/verDescripcion', $data);
+				$this->load->view('paginas/couch/verBotonComentar', $data);
+				$this->load->view('paginas/couch/ver_Comentarios',$data);
+				$this->load->view('templates/footer.php', $data);	
 		}
-		else
-		{
-			$id = $_POST['id_couch'];
-			$data['page_header'] = '';
-			$data['comentarios'] = $this->couchs_model->getComentarios($id);
-
-			$this->load->view('templates/header.php', $data);
-			$this->load->view('paginas/couch/verImagenes', $data);
-			$this->load->view('paginas/couch/verDescripcion', $data);
-			$this->load->view('paginas/couch/verBotonComentar', $data);
-			$this->load->view('paginas/couch/ver_Comentarios', $data);
-			$this->load->view('templates/footer.php', $data);
-		
-		}	
-
-		
-
-	}
+	}			
 }

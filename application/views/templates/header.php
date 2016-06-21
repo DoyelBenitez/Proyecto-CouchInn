@@ -44,10 +44,24 @@
 
 						if(!empty($usuarioTipo))
 						{
+							$mailUserLog = $this->session->userdata('email');
+							$idUserLog = $this->sesiones_model->getUserByEmail($mailUserLog);
+							$idUserLog = reset($idUserLog)->id_usuario; // aca me quede con el id del user logeado
+							$couchsUserLog = $this->couchs_model->getCouchsById_user($idUserLog);//me quedo con sus couchs 
+							$totalCantMen = 0;
+							foreach ($couchsUserLog as $couch) { //recorro todos los couchs del usuario y sumo sus men s/r
+								$id_couch = $couch->id_couch;
+								$cantMenSinR = $this->sesiones_model->getCantDeMensajesSinR($id_couch);
+								$cantMenSinR = reset($cantMenSinR);
+								$cantMenSinR = reset($cantMenSinR);
+								$totalCantMen = $totalCantMen + $cantMenSinR; 	//totalCanMen va a tener la suma de todos los couchs
+							}
+							echo '<li><a href="'.site_url('index.php/couch/responderComentario').'">Tienes ('.$totalCantMen.') mensajes sin responder</a></li>';
 							echo '<li><a href="'.site_url('index.php/sesiones/cerrarSesion').'">Cerrar Sesión ('.$usuarioNombre.')</a></li>';
 						}
 						else
 						{
+
 							echo '<li><a href="'.site_url('index.php/sesiones/iniciarSesion').'">Iniciar Sesión</a></li>';
 							echo '<li><a href="'.site_url('index.php/sesiones/registrarse').'">Registrarse</a></li>';
 						}
@@ -123,7 +137,7 @@
 
 		<!-- Boton para ir atras: -->
 
-		<?php
+		<?php 
 		
 		 /*
 			$currentURL = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];

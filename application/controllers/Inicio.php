@@ -9,6 +9,7 @@ class Inicio extends CI_Controller {
         $this->load->model('couchs_model');
         $this->load->helper('url_helper');
         $this->load->library('session');
+        $this->load->model('sesiones/sesiones_model');
      }
 
 	public function index()

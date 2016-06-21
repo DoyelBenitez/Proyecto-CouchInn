@@ -1,6 +1,4 @@
-
 <br>
-
 <div class="container" style="text-align center">
 <div class="panel panel-default col-md-offset-2 col-md-8">
 	<div class="panel-heading">Detalles</div>
