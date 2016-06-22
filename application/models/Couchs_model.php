@@ -29,30 +29,11 @@ class Couchs_Model extends CI_Model {
 				return $query->result();
 		}
 
+		//usado en: verDescripcion,
 		public function getTipoOfCouch($id_couch)
 		{
 				$query = $this->db->query('SELECT t.tipo, t.id_tipo FROM couch c inner join tipo_de_couch t WHERE c.id_tipo = ? ', array($id_couch));
 				 return $query->result();
-		}
-
-		public function getUserData($id_usuario){
-				$query = $this->db->query("SELECT tipo FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
-				return $query->result();
-		}
-
-		 public function getUserNom($id_usuario){
-				$query = $this->db->query("SELECT nombre FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
-				return $query->result();
-		}
-
-		public function getUserData2($id_usuario){
-				$query = $this->db->query("SELECT u.nombre FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
-				return $query->result();
-		}
-
-		public function getId($email){
-		$query = $this->db->query("SELECT id_usuario FROM usuario WHERE usuario.estado = 'normal' and usuario.email = ? ", array($email));
-			return $query->result();
 		}
 
 		public function agregarImagenACouch($id_couch,$ruta_imagen)
@@ -131,4 +112,19 @@ class Couchs_Model extends CI_Model {
             return $query->result();
         }
 
+        public function getCouchsById_user($id_user){
+        	$query = $this->db->query("SELECT * FROM couch WHERE couch.id_usuario = ?", array($id_user));
+        	return $query->result();
+        }
+
+        public function getComentariosSinResponderById_couch($id_couch){
+            $query = $this->db->query("SELECT * FROM comentarios WHERE id_couch = ? and comentarios.respuesta = ''",array($id_couch));
+            return $query->result();
+
+        }
+
+        public function setRespuesta ($respuesta, $id_comentario){
+        	$sentence = "UPDATE `comentarios` SET respuesta = ? WHERE id_comentario = ?"; 
+        	$query = $this->db->query($sentence,array($respuesta,$id_comentario));
+        }
 }
