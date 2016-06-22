@@ -1,5 +1,5 @@
 
-<h4 style="text-align:center">Mis Couchs:</h4>
+<h3 style="text-align:center">Mis Couchs:</h3>
 <div class="container" >
 	<ul class="list-group">
 		<?php if(empty($couchs)) echo '<li class="list-group-item" style="text-align:center"> No has agregado ningun couch todavia </li>'  ?>

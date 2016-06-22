@@ -42,4 +42,42 @@ class Reservas_Model extends CI_Model {
 
 		$query = $this->db->query($sentence,$datos);
 	}
+
+	public function rechazarReserva($id_reserva)
+	{
+		$sentence = "UPDATE  `couchInn`.`reserva` SET  `estado` =  'rechazada' WHERE  `reserva`.`id_reserva` = ? ;";
+		$query = $this->db->query($sentence, array($id_reserva));
+	}
+
+	public function actualizarReservasVencidas()
+	{
+		//Hace que todas las reservas cuya fecha fin ya pasó y fueron aceptadas pasen a estar vencidas
+		//Usada en IniciarSesion
+
+		$sentence = "UPDATE  `couchInn`.`reserva` SET  `estado` =  'vencida' WHERE  reserva.estado = 'aceptada' and `reserva`.`fecha_fin` <= NOW() ;";
+		$query = $this->db->query($sentence);
+	}
+
+	public function rechazarReservasCuyoTiempoExpiro()
+	{
+		//Hace que se pongan en rechazadas las reservas pendientes cuya fecha fin ya pasó
+		//Usada en IniciarSesion
+
+		$sentence = "UPDATE  `couchInn`.`reserva` SET  `estado` =  'rechazada' WHERE  reserva.estado = 'pendiente' and `reserva`.`fecha_fin` <= NOW() ;";
+		$query = $this->db->query($sentence);
+	}
+
+	public function getReservasDeUsuario($id_usuario)
+	{
+		//Trae las reservas realizadas por un usuario, todas
+		//Usada en VerMisReservas
+
+		$sentence = "	SELECT r.id_reserva,r.fecha_inicio,r.fecha_fin,c.id_couch,c.titulo,r.estado,r.id_usuario
+						FROM reserva r inner join couch c on r.id_couch = c.id_couch 
+						WHERE r.id_usuario = ? 
+						ORDER BY c.id_couch";
+
+		$query = $this->db->query($sentence, array($id_usuario));
+		return $query->result();
+	}
 }

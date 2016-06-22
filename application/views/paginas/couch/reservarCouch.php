@@ -44,6 +44,14 @@
 			}
 			?>
 		<input type="submit" value="Reservar" class="btn btn-default">
+		</form>
+		
+		<!--Volver a la descripcion del couch que quiero reservar -->
+		<?php $atributtes = array('style' => 'float:right'); ?>
+		<?php echo form_open('/index.php/couch/descripcion',$atributtes); ?>
+			<input type="hidden" name="id_couch" id="id_couch" value="<?php echo $couch->id_couch; ?>">
+			<input type="submit" value="Volver" class="btn btn-default">
+		</form>
 
 		<br><br>
 		
@@ -62,4 +70,3 @@
 
 	</div>
 </div>
-</form>

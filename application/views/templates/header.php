@@ -92,6 +92,9 @@
 									echo '<li class="dropdown-header">Couchs</li>';
 									echo '<li> <a href= "'.site_url('index.php/couch/agregarCouch').'"> Agregar un Couch</a></li>';
 									echo '<li> <a href= "'.site_url('index.php/couch/listarCouchsDeUsuario').'"> Mis Couchs</a></li>';
+
+									echo '<li class="dropdown-header">Reservas</li>';
+									echo '<li> <a href= "'.site_url('index.php/reservas/verMisReservas').'"> Mis Reservas </a></li>';
 								}
 							 ?>
 

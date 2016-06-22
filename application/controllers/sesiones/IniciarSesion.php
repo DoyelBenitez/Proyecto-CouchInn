@@ -25,6 +25,7 @@ class IniciarSesion extends CI_Controller {
        	$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		$this->load->model('sesiones/sesiones_model');
+		$this->load->model('reservas/reservas_model');
      }
 
 	public function index()
@@ -47,6 +48,10 @@ class IniciarSesion extends CI_Controller {
 		//Si ya se validaron todos los campos creo las sesión del usuario
 		else
 		{
+			//Actualizo las reservas en la base para que las que se les acabó el tiempo aparezcan como vencidas o rechazadas dependiendo si fueron aceptadas o no
+			$this->reservas_model->actualizarReservasVencidas();
+			$this->reservas_model->rechazarReservasCuyoTiempoExpiro();
+
 			//Lo recupero de la base
 			$datos = $this->sesiones_model->getUserWithPass($_POST['email'],$_POST['passw']);
 			//Este for no deberia ser necesario, pero $datos tiene un arreglo de arreglos, de tamaño 1 :/
