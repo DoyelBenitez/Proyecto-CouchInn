@@ -17,6 +17,7 @@ class Inicio extends CI_Controller {
 		$data['title'] = 'CouchInn';
 		$data['page_header'] = '';
 		$data['couchs'] = $this->couchs_model->getCouchs();
+		$data['imagenes'] = $this->couchs_model->getTodasLasImagenes();
 
 		$this->load->view('templates/header.php', $data);
 		$this->load->view('paginas/inicio',$data);

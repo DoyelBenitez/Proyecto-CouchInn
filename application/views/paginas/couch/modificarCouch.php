@@ -74,16 +74,39 @@
 
 		<!-- Imagen -->
 		<h4><b> Imagen nueva: </b></h4>
-		<label for="userfile" class="control-label"> Imagen principal: </label>
+		<label for="imagen1" class="control-label"> Imagen principal: </label>
 		<p>Esta es la imagen que se verá en el inicio si usted es premium.</p>
-		<input type="file" name="userfile" size="20"/>
-		<?php if(!empty($error))
-			{
+		<input type="file" name="imagen1" size="20"/>
+		<?php if(!empty(form_error('imagen1'))){
 				echo '<div class="alert alert-danger">';
-				echo $error;
+				echo form_error('imagen1');
 				echo '</div>';
 			}
-			?>
+		?>
+		<br>
+
+		<!-- Imagen2 -->
+		<label for="imagen2" class="control-label"> 2da Imagen: </label>
+		<p>(gif, jpg o png)</p>
+		<input type="file" name="imagen2" size="20"/>
+		<?php if(!empty(form_error('imagen2'))){
+				echo '<div class="alert alert-danger">';
+				echo form_error('imagen2');
+				echo '</div>';
+			}
+		?>
+		<br>
+
+		<!-- Imagen3 -->
+		<label for="imagen3" class="control-label"> 3era Imagen: </label>
+		<p>(gif, jpg o png)</p>
+		<input type="file" name="imagen3" size="20"/>
+		<?php if(!empty(form_error('imagen3'))){
+				echo '<div class="alert alert-danger">';
+				echo form_error('imagen3');
+				echo '</div>';
+			}
+		?>
 		<br>
 		
 		<!-- Couch original -->

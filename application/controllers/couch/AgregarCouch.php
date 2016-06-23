@@ -64,8 +64,6 @@ class AgregarCouch extends CI_Controller {
 			//Si no se paso validacion
 			if($this->form_validation->run() == FALSE)
 			{
-				echo "<script> alert('No paso validacion') </script>";
-
 				$this->load->view('templates/header.php',$data);
 				$this->load->view('paginas/couch/agregarCouch', $data);
 				$this->load->view('templates/footer.php',$data);
@@ -74,20 +72,15 @@ class AgregarCouch extends CI_Controller {
 			//Si se validaron todos los campos
 			else
 			{
-				$imgPrincipal = 0;
-				echo "<script> alert('Paso validacion') </script>";
 				foreach($_FILES as $key => $value)
 				{
 					$nombreImagen = $_FILES[$key]['name'];
 					if (!empty($nombreImagen)) {
 						$ruta_imagen[$key] = "imagenes/couchs/".$nombreImagen;
 					}
-					$imgPrincipal = $key;
 				}
-				/*
-				$imagen = $this->upload->data();
-				$ruta_imagen = "imagenes/couchs/".$imagen['file_name'];
-				*/
+				
+
 				$tipo = $this->tipos_model->getIdTipo($_POST['tipo']);
 				$id_tipo = reset($tipo)->id_tipo;
 				
@@ -108,13 +101,13 @@ class AgregarCouch extends CI_Controller {
 				$couch = $this->couchs_model->getCouchByName($couch['titulo']);
 				$id_couch = reset($couch)->id_couch;
 
-
+				$numero = 1;
 				foreach($_FILES as $key => $ruta){
 					if(isset($ruta_imagen[$key]))
 					{
-						print_r($ruta_imagen[$key]);
 						move_uploaded_file($_FILES[$key]["tmp_name"], $ruta_imagen[$key]);
-						$this->couchs_model->agregarImagenACouch($id_couch, $ruta_imagen[$key]);
+						$this->couchs_model->agregarImagenACouchPorNumero($id_couch,$numero,$ruta_imagen[$key]);
+						$numero++;
 					}
 				}
 				echo "<script> alert('¡El couch se ha agregado satisfactoriamente!') </script>";

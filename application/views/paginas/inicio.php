@@ -27,7 +27,14 @@
      					 
 					?>
 					<?php if ($usuario == "premium" or $usuario == "admin"){?>
-						<input type= "image" src=<?php echo $couch->imagen; ?> class="img-circle  center-block" style="height:400px;width:500px"  alt="Submit Form" VSPACE="10"></div> </span>
+						
+						<?php foreach ($imagenes as $key => $imagen) {
+							if (($imagen->id_couch == $couch->id_couch) and ($imagen->numero == 1)) {
+								$imagenPrincipal = $imagen->imagen;
+							}
+						} ?>
+
+						<input type= "image" src=<?php echo $imagenPrincipal; ?> class="img-circle  center-block" style="height:400px;width:500px"  alt="Submit Form" VSPACE="10"></div> </span>
 					<?php
 						}
 					else

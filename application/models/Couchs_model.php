@@ -21,6 +21,11 @@ class Couchs_Model extends CI_Model {
 				return $query->result();
 		}
 
+		public function getTodasLasImagenes(){ 
+				$query = $this->db->query('SELECT * FROM imagenes_couchs');
+				return $query->result();
+		}
+
 		public function getUserOfCouch($id_couch)
 		{
 				$query = $this->db->query('	SELECT u.email 
@@ -36,16 +41,23 @@ class Couchs_Model extends CI_Model {
 				 return $query->result();
 		}
 
-		public function agregarImagenACouch($id_couch,$ruta_imagen)
+		public function agregarImagenACouchPorNumero($id_couch,$numero,$ruta_imagen)
 		{
 			$sentence =
 			"INSERT INTO  `couchInn`.`imagenes_couchs` (
 						`id_img` ,
 						`id_couch` ,
+						`numero`,
 						`imagen`
 						)
-						VALUES (NULL ,  ?,  ?);";
-			$query = $this->db->query($sentence, array($id_couch,$ruta_imagen));
+						VALUES (NULL , ?, ?, ?);";
+			$query = $this->db->query($sentence, array($id_couch,$numero,$ruta_imagen));
+		}
+
+		public function modificarImagenACouchPorNumero($id_couch,$numero,$ruta_imagen)
+		{
+			$sentence = "UPDATE couchInn.imagenes_couchs c SET imagen = ? WHERE c.id_couch = ? and c.numero = ?;";
+			$query = $this->db->query($sentence, array($ruta_imagen,$id_couch,$numero));
 		}
 
 		public function getCouchByName($titulo)
@@ -70,14 +82,14 @@ class Couchs_Model extends CI_Model {
 						`estado`
 						)
 			VALUES (NULL ,?,?,?,?,?,?,?,'normal');";
-			$query = $this->db->query($sentence, $couch);
+			$query = $this->db-> query($sentence, $couch);
 		}
 
 		public function eliminarCouch($id_couch)
 		{
 			//Si existe el couch lo borro
 			if(!empty($this->getCouch($id_couch))){
-				$sentence = "UPDATE `test`.`couch` SET estado = 'borrado' WHERE `id_couch` = ?";
+				$sentence = "UPDATE `couchInn`.`couch` SET estado = 'borrado' WHERE `id_couch` = ?";
 				$query = $this->db->query($sentence, array($id_couch));
 			}
 			else
@@ -128,4 +140,51 @@ class Couchs_Model extends CI_Model {
         	$sentence = "UPDATE `comentarios` SET respuesta = ? WHERE id_comentario = ?"; 
         	$query = $this->db->query($sentence,array($respuesta,$id_comentario));
         }
+
+        public function modificarCouch($couch)
+		{
+			$id_couch = $couch['id_couch'];
+			if(!empty($couch['titulo'])) $this->setTitulo($couch['titulo'],$id_couch);
+			if(!empty($couch['descripcion'])) $this->setDescripcion($couch['descripcion'],$id_couch);
+			if(!empty($couch['localidad'])) $this->setLocalidad($couch['localidad'],$id_couch);
+			if(!empty($couch['capacidad'])) $this->setCapacidad($couch['capacidad'],$id_couch);
+			if(!empty($couch['imagen'])) $this->setImagen($couch['imagen'],$id_couch);
+			if(!empty($couch['tipohospedaje'])) $this->setTipoHospedaje($couch['tipohospedaje'],$id_couch);
+		}
+
+
+		public function setTitulo($titulo,$id_couch)
+		{
+			$sentence = "UPDATE  `couchInn`.`couch` SET  `titulo` =  ? WHERE  `couch`.`id_couch` = ?;";
+			$query = $this->db->query($sentence,array($titulo,$id_couch));
+		}
+		public function setDescripcion($descripcion,$id_couch)
+		{
+			$sentence = "UPDATE  `couchInn`.`couch` SET  `descripcion` =  ? WHERE  `couch`.`id_couch` = ?;";
+			$query = $this->db->query($sentence,array($descripcion,$id_couch));
+		}
+		public function setLocalidad($localidad,$id_couch)
+		{
+			$sentence = "UPDATE  `couchInn`.`couch` SET  `localidad` =  ? WHERE  `couch`.`id_couch` = ?;";
+			$query = $this->db->query($sentence,array($localidad,$id_couch));
+		}
+		public function setCapacidad($capacidad,$id_couch)
+		{
+			$sentence = "UPDATE  `couchInn`.`couch` SET  `capacidad` =  ? WHERE  `couch`.`id_couch` = ?;";
+			$query = $this->db->query($sentence,array($capacidad,$id_couch));
+
+		}
+
+		public function setImagen($imagen,$id_couch)
+		{
+			$sentence = "UPDATE  `couchInn`.`couch` SET  `imagen` =  ? WHERE  `couch`.`id_couch` = ?;";
+			$query = $this->db->query($sentence,array($imagen,$id_couch));
+
+		}
+
+		public function setTipoHospedaje($tipohospedaje,$id_couch)
+		{
+			$sentence = "UPDATE  `couchInn`.`couch` SET  `tipohospedaje` =  ? WHERE  `couch`.`id_couch` = ?;";
+			$query = $this->db->query($sentence,array($tipohospedaje,$id_couch));
+		}
 }
