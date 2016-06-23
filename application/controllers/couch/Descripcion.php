@@ -6,6 +6,7 @@ class Descripcion extends CI_Controller {
 	public function __construct(){
         parent::__construct();
         $this->load->model('couchs_model');
+        $this->load->model('reservas/puntajes_model');
         $this->load->model('sesiones/sesiones_model');
         $this->load->helper('url_helper');
         $this->load->helper(array('form', 'url'));
@@ -20,7 +21,10 @@ class Descripcion extends CI_Controller {
 		//Me quedo con las imagenes del couch
 		$data['imagenes'] = $this->couchs_model->getCouchImagenes($id);
 
-
+		//Voy a buscar puntaje promedio del couch
+		$promedio = $this->puntajes_model->getPuntajePromedioCouch($id);
+		$data['promedio'] = reset($promedio)->promedio;
+ 
 		//Voy a buscar el couch
 		$couch = $this->couchs_model-> getCouch($id);
 		$couch = reset($couch);

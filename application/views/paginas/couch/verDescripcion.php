@@ -16,7 +16,7 @@
 			 	<p> <?php echo $couch->descripcion ?>.</p>
 			 	
 			 
-					<li> Puntaje promedio: <?php //ACA HAY QUE CALCULAR PORCENTAJE ?>.</li>
+					<li> Puntaje promedio: <?php if(!empty($promedio)) echo $promedio; else echo 'n/a'; ?>.</li>
 					<li> Capacidad: <?php echo $couch->capacidad ?> persona/s.</li>
 					<li> Localidad: <?php echo $couch->localidad ?> </li>
 					<?php

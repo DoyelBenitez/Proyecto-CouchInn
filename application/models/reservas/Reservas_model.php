@@ -8,7 +8,11 @@ class Reservas_Model extends CI_Model {
 
 	public function getReservasDeCouch($id_couch)
 	{
-		$sentence = "SELECT * FROM reserva r inner join couch c on r.id_couch = c.id_couch WHERE c.id_couch = r.id_couch;";
+		$sentence = "	SELECT r.id_reserva,r.fecha_inicio,r.fecha_fin,r.estado,u.email,u.nombre,u.id_usuario
+						FROM reserva r 	inner join couch c on (r.id_couch = c.id_couch)
+										inner join usuario u on (r.id_usuario = u.id_usuario)
+					 	WHERE c.id_couch = r.id_couch
+					 	ORDER BY r.estado;";
 		$query = $this->db->query($sentence);
 		return $query->result();
 	}
@@ -18,6 +22,19 @@ class Reservas_Model extends CI_Model {
 		//Usado en ReservarCouch
 		$sentence = "SELECT * FROM reserva r inner join couch c on r.id_couch = c.id_couch WHERE r.estado = 'aceptada' and '".$id_couch."' = r.id_couch ORDER BY r.fecha_inicio";
 		$query = $this->db->query($sentence);
+		return $query->result();
+	}
+
+	public function getReservasDeCouchsDeUsuario($id_usuario)
+	{
+		//No se si hace falta, lo dejo por las dudas
+		//Trae todas las reservas de todos los couchs pertenecientes a un usuario
+		$sentence = "	SELECT * 
+						FROM reserva r
+						WHERE r.id_couch IN
+						(SELECT * FROM couch c  WHERE c.estado = 'normal' and c.id_usuario = ?) ";
+		
+		$query = $this->db->query($sentence,array($id_usuario));
 		return $query->result();
 	}
 
@@ -41,6 +58,12 @@ class Reservas_Model extends CI_Model {
 					VALUES (NULL, ?, ?, ?, ?, 'pendiente');";
 
 		$query = $this->db->query($sentence,$datos);
+	}
+
+	public function aceptarReserva($id_reserva)
+	{
+		$sentence = "UPDATE  `couchInn`.`reserva` SET  `estado` =  'aceptada' WHERE  `reserva`.`id_reserva` = ? ;";
+		$query = $this->db->query($sentence, array($id_reserva));
 	}
 
 	public function rechazarReserva($id_reserva)

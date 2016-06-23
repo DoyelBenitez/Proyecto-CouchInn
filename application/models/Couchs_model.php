@@ -64,11 +64,12 @@ class Couchs_Model extends CI_Model {
 						`descripcion` ,
 						`capacidad` ,
 						`localidad` ,
+						`imagen` ,
 						`id_tipo` ,
 						`id_usuario` ,
 						`estado`
 						)
-			VALUES (NULL ,  ?,  ?,  ?, ?,  ?,  ?,  'normal');";
+			VALUES (NULL ,?,?,?,?,?,?,?,'normal');";
 			$query = $this->db->query($sentence, $couch);
 		}
 

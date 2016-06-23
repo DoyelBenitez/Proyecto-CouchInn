@@ -32,16 +32,21 @@
 		$userId_couch =$couch->id_usuario; 
 		
 		if($userId_logeado == $userId_couch) { // si el usuario que esta logeado es el mismo que el del couch then?>
-		
+			
+			<!-- Botón para ver las reservas del couch -->
 			<div>
-			<center><input type="submit" value="Ver_reservas(NO FUNCIONA)" class="btn btn-default"/></center>
+				<form method="post" action="<?php echo site_url('index.php/reservas/reservasCouch/').'/'.$couch->id_couch; ?>">
+				<center><input type="submit" value="Ver reservas" class="btn btn-default"/></center>
+				</form>
 			</div>
-			<div class="container" style="text-align center"> <?php // si tiene pregunta para responder le muestra la opcion ?>
-			<div class="text-center">
-			<a href="<?php echo site_url('index.php/couch/responderComentario'); ?>">
-			<p> ¿Quieres responder? apreta aquí.</p>
-			</a>
-			</div>
+			<br>
+			<!-- Si tiene pregunta para responder le muestra la opcion -->
+			<div class="container" style="text-align center"> 
+				<div class="text-center">
+				<a href="<?php echo site_url('index.php/couch/responderComentario'); ?>">
+					<p> ¿Quieres responder? apreta aquí.</p>
+				</a>
+				</div>
 			</div>
 				
 <?php	} 

@@ -3,10 +3,10 @@
 <div style="text-align:center">
 		<br><br>	
 		
-		<!-- Imagen Grande de logo -->
+		<!-- Imagen Grande de logo 
 		<a href="<?php echo site_url(); ?>">
 		<p style="text-align=center;"><img src="<?php echo site_url('imagenes/logo.png'); ?>" width="800" height="200" ></p>
-		</a>
+		</a> -->
 	</div>
 <br>
 
@@ -25,6 +25,9 @@
 	$idUserLog = $this->sesiones_model->getUserByEmail($mailUserLog);
 	$idUserLog = reset($idUserLog)->id_usuario; // aca me quede con el id del user logeado
 	$couchsUserLog = $this->couchs_model->getCouchsById_user($idUserLog);//me quedo con sus couchs
+	if (empty($couchsUserLog)) {
+		echo '<p style="text-align:center"> No tiene ningún mensaje sin responder </p>';
+	}
 	foreach ($couchsUserLog as $couch){ //recorro todos los couchs del usuario 
 		$titulo =$couch->titulo;	
 	?>

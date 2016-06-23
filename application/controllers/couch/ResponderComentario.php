@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class responderComentario extends CI_Controller {
+class ResponderComentario extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -46,6 +46,7 @@ class responderComentario extends CI_Controller {
 		$data['title'] = 'CouchInn';
 		$data['page_header'] = '';
 
+		$this->load->view('templates/header.php', $data);
 		$this->load->view("paginas/couch/responderComentarios");
 		$this->load->view('templates/footer.php', $data);
 

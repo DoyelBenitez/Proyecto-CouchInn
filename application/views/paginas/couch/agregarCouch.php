@@ -6,10 +6,11 @@
 		<h2> Agregar un Couch: </h2>
 		<br>
 		
+		<p><?php print_r(array_values($_FILES)); ?></p>
+
 		<!-- Titulo -->
 		<label for="titulo"> Titulo: </label>
 		<input type="text" name="titulo" value="<?php if(isset($_POST['titulo'])) echo $_POST['titulo']; ?>" class="form-control" placeholder="Título del Couch, (Máximo 50 letras)" size="50" maxlength="50">
-		
 		<?php if(!empty(form_error('titulo'))){
 				echo '<div class="alert alert-danger">';
 				echo form_error('titulo');
@@ -21,7 +22,6 @@
 		<!-- Descripcion -->
 		<label for="descripcion"> Descripcion: </label>
 		<input type="text" name="descripcion" value="<?php if(isset($_POST['descripcion'])) echo $_POST['descripcion']; ?>" class="form-control" placeholder="Descripcion del Couch " size="50" maxlength="200">
-		
 		<?php if(!empty(form_error('descripcion'))){
 				echo '<div class="alert alert-danger">';
 				echo form_error('descripcion');
@@ -33,7 +33,6 @@
 		<!-- Localidad -->
 		<label for="localidad"> Localidad: </label>
 		<input type="text" name="localidad" value="<?php if(isset($_POST['localidad'])) echo $_POST['localidad']; ?>" class="form-control" placeholder="Localidad del couch, ej: La Plata" size="50" maxlength="50">
-		
 		<?php if(!empty(form_error('localidad'))){
 				echo '<div class="alert alert-danger">';
 				echo form_error('localidad');
@@ -45,7 +44,6 @@
 		<!-- Capacidad -->
 		<label for="capacidad"> Capacidad (entre 1 y 12): </label>
 		<input type="number" name="capacidad" min="1" max="12" value="<?php if(isset($_POST['capacidad'])) echo $_POST['capacidad']; ?>" size="50">
-		
 		<?php if(!empty(form_error('capacidad'))){
 				echo '<div class="alert alert-danger">';
 				echo form_error('capacidad');
@@ -58,8 +56,10 @@
 		<label for="tipo">Tipo de hospedaje: </label>
 		<select class="form-control" name="tipo" >
 		<?php 
-			foreach ($tipos as $tipo) {
-				echo "<option>".$tipo->tipo."</option>";
+			foreach ($tipos as $tipo) { ?>
+				<option><?php echo $tipo->tipo ?></option>
+		
+		<?php 	
 			}
 		 ?>
 		</select>
@@ -70,16 +70,40 @@
 		<input type="hidden" name="usuario" id="usuario" value="<?php echo $emailUsuario; ?>">
 
 		<!-- Imagen -->
-		<label for="userfile" class="control-label"> Imagen principal: </label>
-		<p>Esta es la imagen que se verá en el inicio si usted es premium.</p>
-		<input type="file" name="userfile" size="20"/>
-		<?php if(!empty($error))
-			{
+		<label for="imagen1" class="control-label"> Imagen principal: </label>
+		<p>Esta es la imagen que se verá en el inicio si usted es premium. </p>
+		<p>(gif, jpg o png)</p>
+		<input type="file" name="imagen1" size="20"/>
+		<?php if(!empty(form_error('imagen1'))){
 				echo '<div class="alert alert-danger">';
-				echo $error;
+				echo form_error('imagen1');
 				echo '</div>';
 			}
-			?>
+		?>
+		<br>
+
+		<!-- Imagen2 -->
+		<label for="imagen2" class="control-label"> 2da Imagen: </label>
+		<p>(gif, jpg o png)</p>
+		<input type="file" name="imagen2" size="20"/>
+		<?php if(!empty(form_error('imagen2'))){
+				echo '<div class="alert alert-danger">';
+				echo form_error('imagen2');
+				echo '</div>';
+			}
+		?>
+		<br>
+
+		<!-- Imagen3 -->
+		<label for="imagen3" class="control-label"> 3era Imagen: </label>
+		<p>(gif, jpg o png)</p>
+		<input type="file" name="imagen3" size="20"/>
+		<?php if(!empty(form_error('imagen3'))){
+				echo '<div class="alert alert-danger">';
+				echo form_error('imagen3');
+				echo '</div>';
+			}
+		?>
 		<br>
 		
 		

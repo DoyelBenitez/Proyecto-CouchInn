@@ -27,7 +27,7 @@
      					 
 					?>
 					<?php if ($usuario == "premium" or $usuario == "admin"){?>
-					<input type= "image" src=<?php echo $couch->imagen; ?> class="img-circle  center-block" style="height:400px;width:500px"  alt="Submit Form" VSPACE="10"></div> </span>
+						<input type= "image" src=<?php echo $couch->imagen; ?> class="img-circle  center-block" style="height:400px;width:500px"  alt="Submit Form" VSPACE="10"></div> </span>
 					<?php
 						}
 					else

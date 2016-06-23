@@ -10,22 +10,39 @@
 		<?php 
 			if(empty($reservas)){
 				echo '<li class="list-group-item" style="text-align:center"> No tiene reservas realizadas todavía </li>';
-		}?>	
+			}
+		?>	
+		
 		<!-- Sino muestro estas reservas -->
+		
+		<!-- Uso la variable $couchActual para hacer un separador entre las reservas de los couchs -->
+		<?php if(!empty($reservas)) $couchActual = reset($reservas)->id_couch;?>
+
 		<?php foreach ($reservas as $key => $reserva) { ?>
 			
-
+			<!-- Si cambió el couchActual en el for hago un separador para distinguir las reservas de cada couch -->
+			<?php 
+				if ($reserva->id_couch != $couchActual) {
+					echo '<li class=" list-group-item"> </li>';
+				}
+				?>
+			
+			<!-- Datos de la reserva -->
 			<li class=" list-group-item" >
+
+			<div class="btn-toolbar" role="group" aria-label="...">
+					
 				<?php echo '<b>'.($key+1).'. Couch:</b> '. $reserva->titulo . ' <b>Inicio:</b> '. $reserva->fecha_inicio . ' <b>Fin:</b> '. $reserva->fecha_fin; ?>
 				
 				<?php $atributtes = array('style' => 'float:right'); ?>
-
+				
+				<!-- Botón ver couch -->
 				<?php echo form_open('/index.php/couch/descripcion',$atributtes); ?>
 					<input type="hidden" id="id_couch" name="id_couch" value="<?php echo $reserva->id_couch; ?>">
 					<input type="submit" class="btn btn-default" value="Ver Couch">
 				</form>
 				
-
+				<!-- Botón puntuar y sus checkeos -->
 				<?php 
 					$yaPuntuo = false;
 					foreach ($puntajes as $key => $puntaje) {
@@ -42,7 +59,10 @@
 						<input type="submit" class="btn btn-default" value="Puntuar">
 					</form>
 
-				<?php } ?>
+				<?php } $couchActual = $reserva->id_couch; ?>
+			
+			</div>
+
 			</li>
 
 		<?php  } ?>

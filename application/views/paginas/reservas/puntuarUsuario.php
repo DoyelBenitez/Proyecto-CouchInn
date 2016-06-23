@@ -1,12 +1,13 @@
-<?php echo form_open('/index.php/reservas/puntuarCouch'); ?>
+<?php echo form_open('/index.php/reservas/puntuarUsuario'); ?>
 
 <div class="container" style="">
 	<div class="form-group col-md-offset-2 col-md-8">
-		<h2>Puntuar un couch</h2>
+		<h2>Puntuar un usuario</h2>
 		<br>
 
-		<!-- Mando como ocultos el id_usuario y el id_couch -->
+		<!-- Mando como ocultos el id_usuario y el id_usuario_puntuado, tambien el id_couch para redirigir a reservas -->
 		<input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
+		<input type="hidden" name="id_usuario_puntuado" value="<?php echo $id_usuario_puntuado; ?>">
 		<input type="hidden" name="id_couch" value="<?php echo $id_couch; ?>">
 
 		<!-- Esto es para decirle al error que ya entro una vez a la vista, para que no muestre errores la primera vez que entra -->
@@ -41,8 +42,8 @@
 		</form>
 		
 		<!--Boton para volver a reservas -->
-		<?php $atributtes = array('style' => 'float:right'); ?>
-		<?php echo form_open('/index.php/reservas/verMisReservas',$atributtes); ?>
+		<?php $atributtes = array('style' => 'float:right'); $ruta = '/index.php/reservas/reservasCouch/'.$id_couch;?>
+		<?php echo form_open($ruta,$atributtes); ?>
 			<input type="submit" class="btn btn-default" value="Volver" >
 		</form>
 	</div>

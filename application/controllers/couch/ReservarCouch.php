@@ -16,6 +16,10 @@ class ReservarCouch extends CI_Controller {
 
 	public function index($id_couch){
 		
+	if(empty($this->session->userdata())){
+
+	}
+
 		//Seteo titulo y header
 		$data['title'] = 'Reservar couch';
 		$data['page_header'] = '';
@@ -53,7 +57,9 @@ class ReservarCouch extends CI_Controller {
 					'fecha_inicio'	=> $fecha_inicio,
 					'fecha_fin'		=> $fecha_fin
 					);
-			$this->reservas_model->agregarReserva($datos); 
+			$this->reservas_model->agregarReserva($datos);
+			echo "<script> alert('¡El couch se ha reservado satisfactoriamente!') </script>";
+			echo "<script> window.location.href = '". base_url()."index.php/reservas/verMisReservas/'; </script>";
 		}
 
 	}

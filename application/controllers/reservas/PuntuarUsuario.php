@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PuntuarCouch extends CI_Controller {
+class PuntuarUsuario extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -31,12 +31,15 @@ class PuntuarCouch extends CI_Controller {
 	public function index()
 	{
 		//Pongo titulo de pagina
-		$data['title'] = 'Puntuar un couch';
+		$data['title'] = 'Puntuar un usuario';
 		$data['page_header'] = '';
 
-		//Traigo los id_usuario y id_couch para puntuar
-		$data['id_couch'] = $this->input->post('id_couch');
+		//Traigo los id_usuario y id_usuario_puntuado para puntuar
+		$data['id_usuario_puntuado'] = $this->input->post('id_usuario_puntuado');
 		$data['id_usuario'] = $this->input->post('id_usuario');
+		
+		//Mando el id_couch para el boton atras
+		$data['id_couch'] = $this->input->post('id_couch');
 
 		//Checkeo de que ya entro una vez a la vista para que no muestre mensaje de error de una
 		if (!empty($_POST['entro'])) {
@@ -54,17 +57,19 @@ class PuntuarCouch extends CI_Controller {
 		if($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('templates/header.php', $data);
-			$this->load->view('paginas/reservas/puntuarCouch');
+			$this->load->view('paginas/reservas/puntuarUsuario');
 			$this->load->view('templates/footer.php', $data);
 		}
 		else
 		{
-			$id_couch =	$_POST['id_couch'];
+			$id_usuario_puntuado =	$_POST['id_usuario_puntuado'];
 			$id_usuario = $_POST['id_usuario'];
 			$puntaje = $_POST['puntaje'];
 			$comentario = $_POST['comentario'];
-			$this->puntajes_model->agregarPuntaje($id_couch,$id_usuario,$puntaje,$comentario);
-			echo "<script> alert('Se ha puntuado el couch correctamente'); window.location.href = '" . site_url('/index.php/reservas/verMisReservas')."' </script>";
+			$this->puntajes_model->agregarPuntajeAUsuario($id_usuario,$id_usuario_puntuado,$puntaje,$comentario);
+
+			$id_couch = $_POST['id_couch'];
+			echo "<script> alert('Se ha puntuado al usuario correctamente'); window.location.href = '" . site_url('/index.php/reservas/reservasCouch')."/".$id_couch."' </script>";
 		}
 	}
 }
