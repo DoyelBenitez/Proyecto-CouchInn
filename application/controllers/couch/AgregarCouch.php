@@ -81,8 +81,9 @@ class AgregarCouch extends CI_Controller {
 				}
 				
 
-				$tipo = $this->tipos_model->getIdTipo($_POST['tipo']);
-				$id_tipo = reset($tipo)->id_tipo;
+				//$tipo = $this->tipos_model->getIdTipo($_POST['tipo']);
+				//$id_tipo = reset($tipo)->id_tipo;
+				$id_tipo = $_POST['tipo'];
 				
 				$emailUsuario = $_POST['usuario'];
 				$usuario = $this->sesiones_model->getUser($emailUsuario);
@@ -93,7 +94,6 @@ class AgregarCouch extends CI_Controller {
 						'descripcion' 	=> $_POST['descripcion'],
 						'capacidad' 	=> $_POST['capacidad'],
 						'localidad' 	=> $_POST['localidad'],	
-						'imagen'		=> $ruta_imagen['imagen1'],
 						'id_tipo'		=> $id_tipo,
 						'id_usuario'	=> $id_usuario
 					);

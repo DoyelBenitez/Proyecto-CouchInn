@@ -36,6 +36,7 @@
 		
 		<!-- Localidad -->
 		<h4><b> Localidad: </b></h4>
+		<p>	<?php echo $couch->localidad ?> </p>
 		<label for="localidad"> Localidad nueva: </label>
 		<input type="text" name="localidad" value="<?php if(isset($_POST['localidad'])) echo $_POST['localidad']; ?>" class="form-control" placeholder="Localidad del couch, ej: La Plata" size="50" maxlength="50">
 		
@@ -49,6 +50,7 @@
 
 		<!-- Capacidad -->
 		<h4><b> Capacidad: </b></h4>
+		<p>	<?php echo $couch->capacidad ?> </p>
 		<label for="capacidad"> Capacidad nueva (entre 1 y 12): </label>
 		<input type="number" name="capacidad" min="1" max="12" value="<?php if(isset($_POST['capacidad'])) echo $_POST['capacidad']; ?>" size="50">
 		
@@ -62,11 +64,14 @@
 
 		<!-- Tipo de hospedaje -->
 		<h4><b> Tipo de Hospedaje: </b></h4>
+		<?php 	$tipo= $this->couchs_model->getTipoOfCouch($couch->id_tipo);
+    			$tipo = reset($tipo)->tipo ?>
+		<p>	<?php echo $tipo ?> </p>
 		<label for="tipo">Tipo de hospedaje nuevo: </label>
-		<select class="form-control" name="tipo" >
+		<select class="form-control" name="tipo" id="tipo" >
 		<?php 
 			foreach ($tipos as $tipo) {
-				echo "<option>".$tipo->tipo."</option>";
+				echo '<option value="'.$tipo->id_tipo.'">'.$tipo->tipo."</option>";
 			}
 		 ?>
 		</select>

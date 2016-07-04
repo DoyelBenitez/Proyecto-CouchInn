@@ -2,9 +2,8 @@
 <div class="container">
 <div class="panel panel-default col-md-offset-2 col-md-8">
 	<div class="panel-heading">Comentarios</div>
-	<div class="panel-body">	
+	<div class="panel-body">
 		<?php ;
-				
 		    $reverse = array_reverse($comentarios); ?>
 			<br>
 			<?php

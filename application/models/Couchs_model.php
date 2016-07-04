@@ -37,8 +37,8 @@ class Couchs_Model extends CI_Model {
 		//usado en: verDescripcion,
 		public function getTipoOfCouch($id_couch)
 		{
-				$query = $this->db->query('SELECT t.tipo, t.id_tipo FROM couch c inner join tipo_de_couch t WHERE c.id_tipo = ? ', array($id_couch));
-				 return $query->result();
+				$query = $this->db->query('SELECT t.tipo, t.id_tipo FROM couch c inner join tipo_de_couch t on t.id_tipo = c.id_tipo WHERE c.id_tipo = ? ', array($id_couch));
+				return $query->result();
 		}
 
 		public function agregarImagenACouchPorNumero($id_couch,$numero,$ruta_imagen)
@@ -56,8 +56,19 @@ class Couchs_Model extends CI_Model {
 
 		public function modificarImagenACouchPorNumero($id_couch,$numero,$ruta_imagen)
 		{
-			$sentence = "UPDATE couchInn.imagenes_couchs c SET imagen = ? WHERE c.id_couch = ? and c.numero = ?;";
-			$query = $this->db->query($sentence, array($ruta_imagen,$id_couch,$numero));
+			if(!empty($this->existeImagenDeCouchPorNumero($id_couch,$numero)))
+			{
+				$sentence = "UPDATE couchInn.imagenes_couchs c SET imagen = ? WHERE c.id_couch = ? and c.numero = ?;";
+				$query = $this->db->query($sentence, array($ruta_imagen,$id_couch,$numero));
+			}
+			else $this->agregarImagenACouchPorNumero($id_couch,$numero,$ruta_imagen);
+		}
+
+		public function existeImagenDeCouchPorNumero($id_couch,$numero)
+		{
+			$sentence = "SELECT * FROM imagenes_couchs c WHERE c.id_couch = ? and c.numero = ?";
+			$query = $this->db->query($sentence, array($id_couch,$numero));
+			return $query->result();
 		}
 
 		public function getCouchByName($titulo)
@@ -68,7 +79,6 @@ class Couchs_Model extends CI_Model {
 
 		public function agregarCouch($couch)
 		{
-			print_r(array_values($couch));
 		   	$sentence =
 		   	"INSERT INTO  `couchInn`.`couch` (
 						`id_couch` ,
@@ -76,12 +86,11 @@ class Couchs_Model extends CI_Model {
 						`descripcion` ,
 						`capacidad` ,
 						`localidad` ,
-						`imagen` ,
 						`id_tipo` ,
 						`id_usuario` ,
 						`estado`
 						)
-			VALUES (NULL ,?,?,?,?,?,?,?,'normal');";
+			VALUES (NULL ,?,?,?,?,?,?,'normal');";
 			$query = $this->db-> query($sentence, $couch);
 		}
 
@@ -120,7 +129,11 @@ class Couchs_Model extends CI_Model {
 
         public function getComentarios($id_c)
         {
-            $sentence = "SELECT * FROM comentarios WHERE id_couch = ?;";
+            $sentence = "SELECT c.* 
+            			FROM comentarios c 
+            				inner join couch co on c.id_couch = co.id_couch
+            			WHERE c.id_couch = ? and co.estado = 'normal';";
+
             $query = $this->db->query($sentence, array($id_c));
             return $query->result();
         }
@@ -131,7 +144,9 @@ class Couchs_Model extends CI_Model {
         }
 
         public function getComentariosSinResponderById_couch($id_couch){
-            $query = $this->db->query("SELECT * FROM comentarios WHERE id_couch = ? and comentarios.respuesta = ''",array($id_couch));
+            $query = $this->db->query("SELECT * 
+            							FROM comentarios c inner join couch co on c.id_couch = co.id_couch
+            							WHERE c.id_couch = ? and c.respuesta = '' and co.estado = 'normal'",array($id_couch));
             return $query->result();
 
         }

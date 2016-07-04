@@ -1,7 +1,7 @@
 <?php echo form_open('/index.php/sesiones/registrarse'); ?>
 
 <div class="container" style="">
-	<div class="form-group col-md-offset-4 col-md-4">
+	<div class="form-group col-md-offset-3 col-md-6">
 
 		<!-- EMAIL -->
 		<label for="email"> Email: </label>

@@ -128,7 +128,9 @@ class Sesiones_Model extends CI_Model {
 		}
 	//usado en:
 	public function getCantDeMensajesSinR($id_couchUserLog){ // retonrna la cantidad de mensajes sin lee del user logeado
-		$query = $this->db->query("SELECT count(*) FROM comentarios WHERE comentarios.id_couch = ? and comentarios.respuesta = ''", array($id_couchUserLog));
+		$query = $this->db->query("SELECT count(*) 
+									FROM comentarios c inner join couch co on c.id_couch = co.id_couch
+									WHERE c.id_couch = ? and c.respuesta = '' and co.estado = 'normal'", array($id_couchUserLog));
 		return $query->result();
 
 	}

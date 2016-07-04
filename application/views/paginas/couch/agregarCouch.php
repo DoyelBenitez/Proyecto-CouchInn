@@ -1,12 +1,12 @@
-<?php echo form_open_multipart('index.php/couch/agregarCouch');?>
+<?php
+echo form_open_multipart('index.php/couch/agregarCouch');
+?>
 
 <div class="container" style="">
 	<div class="form-group col-md-offset-2 col-md-8">
 
 		<h2> Agregar un Couch: </h2>
 		<br>
-		
-		<p><?php print_r(array_values($_FILES)); ?></p>
 
 		<!-- Titulo -->
 		<label for="titulo"> Titulo: </label>
@@ -53,13 +53,12 @@
 		<br><br>
 
 		<!-- Tipo de hospedaje -->
-		<label for="tipo">Tipo de hospedaje: </label>
-		<select class="form-control" name="tipo" >
+		<h4><b> Tipo de Hospedaje: </b></h4>
+		<label for="tipo">Tipo de hospedaje nuevo: </label>
+		<select class="form-control" name="tipo" id="tipo" >
 		<?php 
-			foreach ($tipos as $tipo) { ?>
-				<option><?php echo $tipo->tipo ?></option>
-		
-		<?php 	
+			foreach ($tipos as $tipo) {
+				echo '<option value="'.$tipo->id_tipo.'">'.$tipo->tipo."</option>";
 			}
 		 ?>
 		</select>

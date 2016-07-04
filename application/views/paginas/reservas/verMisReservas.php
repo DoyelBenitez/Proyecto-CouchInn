@@ -32,7 +32,7 @@
 
 			<div class="btn-toolbar" role="group" aria-label="...">
 					
-				<?php echo '<b>'.($key+1).'. Couch:</b> '. $reserva->titulo . ' <b>Inicio:</b> '. $reserva->fecha_inicio . ' <b>Fin:</b> '. $reserva->fecha_fin; ?>
+				<?php echo '<b>'.($key+1).'. Couch:</b> '. $reserva->titulo . ' <b>Inicio:</b> '. $reserva->fecha_inicio . ' <b>Fin:</b> '. $reserva->fecha_fin .'<b> Estado: </b>'. $reserva->estado; ?>
 				
 				<?php $atributtes = array('style' => 'float:right'); ?>
 				

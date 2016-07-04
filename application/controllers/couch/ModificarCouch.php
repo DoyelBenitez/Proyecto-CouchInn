@@ -24,7 +24,7 @@ class ModificarCouch extends CI_Controller {
        	$this->load->helper('url');
        	$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		$this->load->model('couchs_model');
+		$this->load->model('tipos/tipos_model');
      }
 
 	public function index($id_couch)
@@ -34,9 +34,13 @@ class ModificarCouch extends CI_Controller {
 		$data['title'] = 'Modificar datos de couch';
 		$data['page_header'] = '';
 
+		//Voy a buscar el couch
 		$couch = $this->couchs_model->getCouch($id_couch);
 		$couch = reset($couch);
 		$data['couch'] = $couch;
+
+		//Voy a buscar los tipos
+		$data['tipos'] = $this->tipos_model->getTiposDeHospedaje();
 
 		//Pongo las reglas a seguir para validar los campos
 		$this->form_validation->set_rules('titulo', 'titulo', 'alpha');

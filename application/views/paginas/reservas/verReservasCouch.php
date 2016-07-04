@@ -14,10 +14,12 @@
 
 	<ul class="list-group">
 
-		<?php if(empty($reservas)) echo '<li class="list-group-item" style="text-align:center"> Nadie ha reservado este couch todavia </li>'  ?>
+		<?php if(empty($reservas)) echo '<li class="list-group-item" style="text-align:center"> Nadie ha reservado este couch todavia </li>';
+		else{
+		?>
 		
 		<!-- Me quedo con el estado de la reserva actual para usar el estado como separador en el listado -->
-		<?php 
+		<?php
 			$estadoActual = reset($reservas)->estado;
 			echo '<li class="list-group-item"><b>'.ucfirst($estadoActual).'s: </b></li>';
 		?>
@@ -98,6 +100,7 @@
 				<?php $estadoActual = $reserva->estado ?>
 			<?php } ?>
 		<?php } ?>
+		<?php } //Del else?> 
 	</ul>
 </div>
 <br>
