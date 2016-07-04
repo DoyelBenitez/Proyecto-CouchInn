@@ -72,6 +72,12 @@ class Reservas_Model extends CI_Model {
 		$query = $this->db->query($sentence, array($id_reserva));
 	}
 
+	public function cancelarReserva($id_reserva)
+	{
+		$sentence = "UPDATE  `couchInn`.`reserva` SET  `estado` =  'cancelada' WHERE  `reserva`.`id_reserva` = ? ;";
+		$query = $this->db->query($sentence, array($id_reserva));
+	}
+
 	public function actualizarReservasVencidas()
 	{
 		//Hace que todas las reservas cuya fecha fin ya pasó y fueron aceptadas pasen a estar vencidas

@@ -107,9 +107,28 @@ class Couchs_Model extends CI_Model {
 			}
 		}
 
+		public function despublicarCouch($id_couch)
+		{
+			//Si existe el couch lo despublico
+			if(!empty($this->getCouch($id_couch))){
+				$sentence = "UPDATE `couchInn`.`couch` SET estado = 'despublicado' WHERE `id_couch` = ?";
+				$query = $this->db->query($sentence, array($id_couch));
+			}
+			else
+			{
+				return NULL;
+			}
+		}
+
+		public function publicarCouch($id_couch)
+		{
+			$sentence = "UPDATE `couchInn`.`couch` SET estado = 'normal' WHERE `id_couch` = ?";
+			$query = $this->db->query($sentence, array($id_couch));
+		}
+
 		public function couchsDeUsuario($id_usuario)
 		{
-			$sentence = "SELECT * FROM couch WHERE couch.id_usuario = ? and couch.estado = 'normal';";
+			$sentence = "SELECT * FROM couch WHERE couch.id_usuario = ? and couch.estado = 'normal' or couch.estado = 'despublicado';";
 			$query = $this->db->query($sentence, array($id_usuario));
 			return $query->result();
 		}

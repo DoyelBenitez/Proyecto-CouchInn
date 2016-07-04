@@ -42,6 +42,14 @@
 					<input type="submit" class="btn btn-default" value="Ver Couch">
 				</form>
 				
+				<!-- Botón cancelar reserva -->
+				<?php if ($reserva->estado == 'pendiente'){ ?>
+					<form method="post" action="<?php echo site_url('index.php/reservas/cancelarReserva'); ?>" style="float:right">
+						<input type="hidden" name="id_reserva" id="id_reserva" value="<?php echo $reserva->id_reserva; ?>">
+						<input type="submit" class="btn btn-default" value="Cancelar reserva">
+					</form>
+				<?php } ?>
+				
 				<!-- Botón puntuar y sus checkeos -->
 				<?php 
 					$yaPuntuo = false;
