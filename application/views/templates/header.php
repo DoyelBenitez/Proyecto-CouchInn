@@ -96,6 +96,7 @@
 								if ($usuarioTipo == 'admin') {
 									echo '<li class="dropdown-header">Admin</li>';
 									echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
+									echo '<li><a href="'.site_url('index.php/admin/gananciasPremium').'">Ver ganancias</a></li>';
 								/*	echo '<li><a href="#">Eliminar usuario</a></li>'; */
 								}
 							?> 

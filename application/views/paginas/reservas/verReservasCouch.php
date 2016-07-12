@@ -27,9 +27,6 @@
 		<?php foreach ($reservas as $key => $reserva) { ?>
 		
 			<?php
-			//Control para no mostrar las rechazadas
-			if($reserva->estado != 'rechazada'){
-
 				//Si cambio el estado actual pongo separador
 				if($estadoActual != $reserva->estado ){ 
 					echo '<br>';
@@ -67,8 +64,9 @@
 						</form>
 						
 						<!-- Boton rechazar -->
-						<form method="post" action="#">
-							<input type="submit" class="btn btn-default" value="Rechazar reserva(Sin hacer)">
+						<form method="post" action="<?php echo site_url('index.php/reservas/rechazarReserva/'); ?>">
+							<input type="hidden" name="id_reserva" id="id_reserva" value="<?php echo $reserva->id_reserva; ?>">
+							<input type="submit" class="btn btn-default" value="Rechazar reserva">
 						</form>
 
 
@@ -99,7 +97,6 @@
 				</li>
 				<?php $estadoActual = $reserva->estado ?>
 			<?php } ?>
-		<?php } ?>
 		<?php } //Del else?> 
 	</ul>
 </div>

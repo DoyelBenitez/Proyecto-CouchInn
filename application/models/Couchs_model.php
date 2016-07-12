@@ -12,7 +12,7 @@ class Couchs_Model extends CI_Model {
 		}
 
 		public function getCouch($id_couch){ //Funcion que se usa para la descripcion de un couch
-			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = ? ", array($id_couch));
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.id_couch = ? ", array($id_couch));
 			return $query->result();
 		}
 
@@ -128,7 +128,7 @@ class Couchs_Model extends CI_Model {
 
 		public function couchsDeUsuario($id_usuario)
 		{
-			$sentence = "SELECT * FROM couch WHERE couch.id_usuario = ? and couch.estado = 'normal' or couch.estado = 'despublicado';";
+			$sentence = "SELECT * FROM couch WHERE  (couch.estado = 'normal' or couch.estado = 'despublicado') and couch.id_usuario = ?;";
 			$query = $this->db->query($sentence, array($id_usuario));
 			return $query->result();
 		}

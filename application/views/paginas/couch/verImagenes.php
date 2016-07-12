@@ -56,9 +56,12 @@
 
 			<div>
 			<center>
-			<a href="<?php echo site_url('index.php/couch/reservarCouch/'.$couch->id_couch); ?>">
-			<button class="btn btn-default"> Reservar </button>
-			</a>
+			<!-- Control de que no se puedan reservar couchs borrados o despublicados -->
+			<?php if($couch->estado == 'normal'){ ?>
+				<a href="<?php echo site_url('index.php/couch/reservarCouch/'.$couch->id_couch); ?>">
+				<button class="btn btn-default"> Reservar </button>
+				</a>
+			<?php } ?>
 		</center>
 			</div>
 

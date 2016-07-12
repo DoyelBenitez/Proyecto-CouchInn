@@ -52,9 +52,15 @@ class ComprarPremium extends CI_Controller {
 			//Si ya se validaron todos los campos
 			else
 			{
+				//Cambio el campo de comun a premium
 				$usuario = $this->session->userdata();
 				$email = $usuario['email'];
 				$this->sesiones_model->makeUserPremium($email);
+				//Agregar campo a la tabla con todos los pasos a premiums
+				$id_usuario = $this->sesiones_model->getUser($email);
+				$id_usuario = reset($id_usuario)->id_usuario;
+				$precio = 10; //Precio random
+				$this->sesiones_model->agregarCompraPremium($id_usuario,$precio);
 				$usuario['tipo'] = 'premium';
 				$this->session->set_userdata($usuario);
 				echo "<script> alert('¡Has adquirido el servicio Premium!'); window.location.href = '" . base_url()."' </script>";

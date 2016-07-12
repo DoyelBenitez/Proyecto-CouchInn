@@ -81,6 +81,17 @@ class Sesiones_Model extends CI_Model {
 		$query = $this->db->query($sentence,array($email));	
 	}
 
+	public function agregarCompraPremium($id_usuario,$precio)
+	{
+		$sentence = "INSERT INTO  `couchInn`.`compras_premium` (
+						`id_compra` ,
+						`id_usuario` ,
+						`precio` ,
+						`fecha`)
+					VALUES (NULL ,?,?,?);";
+		$query = $this->db->query($sentence, array($id_usuario, $precio, date('Y-m-d')));
+	}
+
 	//Usado en:
 	public function setNombre($nombre,$email)
 	{
@@ -137,6 +148,14 @@ class Sesiones_Model extends CI_Model {
 	//usado en: Descripcion
 	public function getId($email){
 		$query = $this->db->query("SELECT id_usuario FROM usuario WHERE usuario.estado = 'normal' and usuario.email = ? ", array($email));
+		return $query->result();
+	}
+
+	//Para ganancias premium
+	public function gananciasPremiumEntreFechas($fecha1,$fecha2)
+	{
+		$sentence = "SELECT sum(c.precio) as ganancia FROM compras_premium c WHERE c.fecha between ? and ? ;";
+		$query = $this->db->query($sentence, array($fecha1,$fecha2));
 		return $query->result();
 	}
 }

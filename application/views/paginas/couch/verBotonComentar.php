@@ -4,7 +4,7 @@
 
 $user = $this->session->userdata('email'); ?>
 
-<?php	if (!empty($user)) { ?>
+<?php	if ((!empty($user)) and ($couch->estado == 'normal')) { ?>
 
 <div class="container" style="">
 	<div class="panel panel-default col-md-offset-2 col-md-8"> 
