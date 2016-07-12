@@ -66,6 +66,7 @@
 						<!-- Boton rechazar -->
 						<form method="post" action="<?php echo site_url('index.php/reservas/rechazarReserva/'); ?>">
 							<input type="hidden" name="id_reserva" id="id_reserva" value="<?php echo $reserva->id_reserva; ?>">
+							<input type="hidden" name="id_couch" id="id_couch" value="<?php echo $id_couch; ?>">
 							<input type="submit" class="btn btn-default" value="Rechazar reserva">
 						</form>
 

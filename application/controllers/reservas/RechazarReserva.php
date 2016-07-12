@@ -30,12 +30,13 @@ class RechazarReserva extends CI_Controller {
 	{
 		//Traigo el id_reserva y el id_couch
 		$id_reserva = $_POST['id_reserva'];
+		$id_couch = $_POST['id_couch'];
 
 		//Lo cambio en la base
 		$this->reservas_model->rechazarReserva($id_reserva);
 
 		//Redirigo a la pagina anterior
 		echo "<script> alert('¡Se ha rechazado la reserva satisfactoriamente!') </script>";
-		echo "<script> window.location.href = '". base_url()."index.php/reservas/reservasCouch/'; </script>";
+		echo "<script> window.location.href = '". base_url()."index.php/reservas/reservasCouch/".$id_couch."'; </script>";
 	}
 }
