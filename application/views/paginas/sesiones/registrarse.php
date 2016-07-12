@@ -91,7 +91,7 @@
 		<div class="checkbox">
   			<label><input type="checkbox" name="tipo" value="premium"> Adquirir servicio premium </label>
   			<br> <br>
-  			<p> (Requiere de un pago único con tarjeta de crédito al que se le redireccionará luego de registarse).</p>
+  			<p> (Requiere de un pago único con tarjeta de crédito al que se le redireccionará luego de registrarse).</p>
 		</div>
 
 		<!-- BOTON SUBMIT -->
