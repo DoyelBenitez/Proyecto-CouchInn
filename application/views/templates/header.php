@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title> <?php echo $title ?> </title>
 	<link href="<?php echo site_url('/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" media="screen">
+	<link rel="icon" href="<?php echo base_url(); ?>favicon.ico" type="image/gif">
 </head>
 <body>
 	<?php 
@@ -97,7 +98,7 @@
 									echo '<li class="dropdown-header">Admin</li>';
 									echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
 									echo '<li><a href="'.site_url('index.php/admin/gananciasPremium').'">Ver ganancias</a></li>';
-								/*	echo '<li><a href="#">Eliminar usuario</a></li>'; */
+									echo '<li><a href='.site_url('index.php/admin/listarUsuarios').'>Eliminar usuario</a></li>';
 								}
 							?> 
 
@@ -110,6 +111,7 @@
 
 									echo '<li class="dropdown-header">Reservas</li>';
 									echo '<li> <a href= "'.site_url('index.php/reservas/verMisReservas').'"> Mis Reservas </a></li>';
+									echo '<li> <a href= "'.site_url('index.php/reservas/verCouchsVisitados').'"> Mis Couchs visitados </a></li>';
 								}
 							 ?>
 

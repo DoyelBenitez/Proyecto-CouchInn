@@ -31,7 +31,7 @@ class Descripcion extends CI_Controller {
 		$data ['couch'] = $couch;
 
 		//Me quedo con el usuario que publico el couch
-		$usuario = $this->sesiones_model->getUserById($couch->id_usuario);
+		$usuario = $this->sesiones_model->getUserByIdParaCouch($couch->id_usuario);
 		$data['usuario'] = reset($usuario);
 		$data['title'] = $couch->titulo;
 

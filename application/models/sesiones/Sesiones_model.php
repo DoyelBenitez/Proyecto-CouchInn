@@ -26,12 +26,72 @@ class Sesiones_Model extends CI_Model {
 		$query = $this->db->query($sentence, array($email));
 	}
 
-	//Usado en:
-	public function eliminarUsuario($email)
+	//////Estos son los necesarios al eliminar un usuario:///////
+
+	//Usado en: EliminarUsuario
+	public function eliminarUsuarioById($id_usuario)
 	{
-		$sentece = "UPDATE  `couchInn`.`usuario` SET  `estado` =  'borrado' WHERE  `usuario`.`email` = ? ;";
-		$query = $this->db->query($sentence,array($email));
+		$sentence = "UPDATE  `couchInn`.`usuario` SET  `estado` =  'borrado' WHERE  `usuario`.`id_usuario` = ? ;";
+		$query = $this->db->query($sentence,array($id_usuario));
 	}
+
+	//Usado en: EliminarUsuario
+	public function eliminarCouchsDeUsuario($id_usuario)
+	{
+		$sentence = "UPDATE  `couchInn`.`couch` SET  `estado` =  'borrado' WHERE  `couch`.`id_usuario` = ? ;";
+		$query = $this->db->query($sentence,array($id_usuario));
+	}
+
+	//Usado en: EliminarUsuario
+	public function rechazarReservasDeCouchsDeUsuario($id_usuario)
+	{
+		$sentence ="UPDATE 	reserva r
+							INNER JOIN couch c
+								on r.id_couch = c.id_couch 
+					SET  	r.estado =  'rechazada'
+					WHERE  	c.id_usuario = ? and r.estado = 'pendiente';";
+
+		$query = $this->db->query($sentence,array($id_usuario));
+	}
+
+	//Usado en: EliminarUsuario
+	public function cancelarReservasDeUsuario($id_usuario)
+	{
+		$sentence ="UPDATE couchInn.reserva
+					SET  estado = 'cancelada'
+					WHERE  id_usuario = ? and estado = 'pendiente';";
+		$query = $this->db->query($sentence,array($id_usuario));
+	}
+
+
+	////////////////////////////////////////////////////////////////////
+
+	//////Estos son los necesarios para listar usuarios al admin:///////
+
+	//Usado en: ListarUsuarios
+	public function getUsuariosPremium()
+	{
+		$sentence ="SELECT *
+					FROM usuario u	
+					WHERE u.tipo = 'premium' and u.estado = 'normal'
+					ORDER BY u.email;";
+		$query = $this->db->query($sentence);
+		return $query->result();
+	}
+
+	//Usado en: ListarUsuarios
+	public function getUsuariosComunes()
+	{
+		$sentence ="SELECT *
+					FROM usuario u	
+					WHERE u.tipo = 'comun' and u.estado = 'normal'
+					ORDER BY u.email;";
+		$query = $this->db->query($sentence);
+		return $query->result();
+	}
+
+
+	///////////////////////////////////////////////////////////////////
 
 	//Usado en:
 	public function recuperarUsuario($email)
@@ -132,6 +192,13 @@ class Sesiones_Model extends CI_Model {
 		$query = $this->db->query("SELECT * FROM usuario WHERE usuario.estado = 'normal' and usuario.id_usuario = ? ", array($id_usuario));
         return $query->result();
 	}
+
+	//Usado en Descripcion
+	public function getUserByIdParaCouch($id_usuario){
+		$query = $this->db->query("SELECT * FROM usuario WHERE usuario.id_usuario = ? ", array($id_usuario));
+        return $query->result();
+	}
+
 	//Usado en: verImagenes,
 	public function getUserByEmail($email){ 
 		$query = $this->db->query("SELECT * FROM usuario WHERE usuario.estado = 'normal' and usuario.email = ? ", array($email));

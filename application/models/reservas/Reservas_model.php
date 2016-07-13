@@ -38,6 +38,16 @@ class Reservas_Model extends CI_Model {
 		return $query->result();
 	}
 
+	public function getReservasVencidasDeUsuario($id_usuario)
+	{
+		$sentence = "	SELECT r.*,c.titulo
+						FROM reserva r inner join couch c on r.id_couch = c.id_couch
+						WHERE r.id_usuario = ? and r.estado = 'vencida';";
+		
+		$query = $this->db->query($sentence,array($id_usuario));
+		return $query->result();
+	}
+
 	public function getReservasAceptadasEntre2FechasParaCouch($fecha_inicio,$fecha_fin,$id_couch)
 	{
 		//Usado en ReservarCouch
