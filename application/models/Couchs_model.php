@@ -241,7 +241,7 @@ class Couchs_Model extends CI_Model {
 
         public function getCouchsByTipo($tipo)
         {
-        	$query = $this->db->query("SELECT * FROM couch c inner join tipo_de_couch t on c.id_tipo = t.id_tipo WHERE t.tipo = ?", array($tipo));
+        	$query = $this->db->query("SELECT * FROM couch c inner join tipo_de_couch t on c.id_tipo = t.id_tipo WHERE c.estado = 'normal' and t.tipo = ?", array($tipo));
         	return $query->result();
         }
 
@@ -296,8 +296,34 @@ class Couchs_Model extends CI_Model {
 
 		public function getTipoDeCouch() //FIJARSE XQ NO ESTABA ESTA FUNCION
 		{
-				$query = $this->db->query('SELECT * FROM tipo_de_couch  ');
+				$query = $this->db->query("SELECT * FROM tipo_de_couch t  WHERE t.estado = 'normal'");
 				 return $query->result();
 		}
+
+		public function getCouchByMayorFecha($fecha)
+		{
+			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.fecha > '$fecha' ");
+			return $query->result();
+		}
+
+		public function getCouchByMayorFechaById_Couch($id_couch, $fecha)
+		{
+			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.id_couch = $id_couch and c.fecha > '$fecha'");
+			return $query->result();
+		}
+
+		public function getCouchByMenorFecha($fecha)
+		{
+			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.fecha < '$fecha' ");
+			return $query->result();
+		}
+
+		public function getCouchByMenorFechaById_Couch($id_couch, $fecha)
+		{
+			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.id_couch = $id_couch and c.fecha < '$fecha'");
+			return $query->result();
+		}
+
+
 
 }

@@ -12,10 +12,10 @@
     	echo "'mas de 10' ";
     }
     elseif ($caso_prueba == 5) {
-    	echo "'5..10' ";
+    	echo "'hasta 5' ";
     }
     elseif ($caso_prueba == 10) {
-    	echo "'1..5' ";
+    	echo "'hasta 10' ";
     }
     else {
     	echo $caso_prueba . " ";
