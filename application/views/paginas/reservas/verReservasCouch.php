@@ -93,6 +93,12 @@
 							<input type="submit" class="btn btn-default" value="Puntuar usuario">
 						</form>
 					<?php } ?>
+
+					<!-- Botón para ver perfil del usuario que hizo reserva -->
+					<form method="post" action="<?php echo site_url('index.php/verUsuario').'/'.$reserva->id_usuario; ?>">
+						<input type="hidden" name="id_couch" id="id_couch" value="<?php echo $id_couch ?>">
+						<input type="submit" class="btn btn-default" value="Ver Usuario">
+					</form>
 				</div>
 					<br>
 				</li>

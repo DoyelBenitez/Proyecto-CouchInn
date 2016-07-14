@@ -302,25 +302,25 @@ class Couchs_Model extends CI_Model {
 
 		public function getCouchByMayorFecha($fecha)
 		{
-			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.fecha > '$fecha' ");
+			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.fecha > ?",array($fecha));
 			return $query->result();
 		}
 
 		public function getCouchByMayorFechaById_Couch($id_couch, $fecha)
 		{
-			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.id_couch = $id_couch and c.fecha > '$fecha'");
+			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.id_couch = ".$id_couch." and c.fecha > ".$fecha);
 			return $query->result();
 		}
 
 		public function getCouchByMenorFecha($fecha)
 		{
-			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.fecha < '$fecha' ");
+			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.fecha < ".$fecha);
 			return $query->result();
 		}
 
 		public function getCouchByMenorFechaById_Couch($id_couch, $fecha)
 		{
-			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.id_couch = $id_couch and c.fecha < '$fecha'");
+			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.id_couch = ".$id_couch." and c.fecha < ".$fecha);
 			return $query->result();
 		}
 

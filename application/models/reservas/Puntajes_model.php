@@ -63,4 +63,33 @@ class Puntajes_Model extends CI_Model {
 		$query = $this->db->query($sentence,array($id_couch));
 		return $query->result();
 	}
+
+	//Para verUsuario
+	public function getPuntajePromedioUsuario($id_usuario)
+	{
+		$query = $this->db->query("SELECT avg(p.puntaje) as promedio FROM puntajes_usuario p WHERE p.id_usuario_puntuado = ?",array($id_usuario));
+		return $query->result();
+	}
+
+	//Para verUsuario
+	public function getPuntajesAUsuario($id_usuario)
+	{
+		$query = $this->db->query("	SELECT p.*,u.email 
+									FROM puntajes_usuario p 
+										inner join usuario u on p.id_usuario = u.id_usuario 
+									WHERE p.id_usuario_puntuado = ?",
+									array($id_usuario));
+		return $query->result();
+	}
+
+	//Para verPuntajesCouch
+	public function getPuntajesACouch($id_couch)
+	{
+		$query = $this->db->query("	SELECT p.*,u.email 
+									FROM puntajes_couch p 
+										inner join usuario u on p.id_usuario = u.id_usuario 
+									WHERE p.id_couch = ?",
+									array($id_couch));
+		return $query->result();
+	}
 }
