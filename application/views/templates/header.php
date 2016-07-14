@@ -98,6 +98,7 @@
 									echo '<li class="dropdown-header">Admin</li>';
 									echo '<li><a href="'.site_url('index.php/tipos/listarTipos').'">Ver tipos de hospedaje</a></li>';
 									echo '<li><a href="'.site_url('index.php/admin/gananciasPremium').'">Ver ganancias</a></li>';
+									echo '<li><a href="'.site_url('index.php/admin/solicitudesAceptadas').'">Ver Solicitudes Aceptadas</a></li>';
 									echo '<li><a href='.site_url('index.php/admin/listarUsuarios').'>Eliminar usuario</a></li>';
 								}
 							?> 
@@ -139,24 +140,5 @@
 		<a href="<?php echo site_url(); ?>">
 		<p style="text-align=center;"><img src="<?php echo site_url('imagenes/logo.png'); ?>" width="800" height="200" ></p>
 		</a>
-		
-
-		<!-- Boton para ir atras: -->
-
-		<?php 
-		
-		 /*
-			$currentURL = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
->>>>>>> origin/codigo
-			if ( $currentURL != base_url())
-			{
-				if(!empty($_SERVER['HTTP_REFERER']))
-				{
-					$referer = $_SERVER['HTTP_REFERER'];
-					echo '<a href="'.$referer.'" style= "text-align:center" class="btn btn-default"> Ir atrás </a>';
-				}
-			}*/
-		?>
-
 
 	</div>

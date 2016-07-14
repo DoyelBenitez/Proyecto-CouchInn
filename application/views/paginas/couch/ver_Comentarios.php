@@ -18,7 +18,7 @@
 					if ($contador == $limite){
 						break;
 					}
-					$nombreUsuario = $this->sesiones_model->getUserById($comentario->id_usuario);
+					$nombreUsuario = $this->sesiones_model->getUserByIdParaCouch($comentario->id_usuario);
 					$nombreUsuario = reset($nombreUsuario)->nombre;
 				?>
 		 		<h4> <u> <?php echo $nombreUsuario.':'; ?> </u> </h4>

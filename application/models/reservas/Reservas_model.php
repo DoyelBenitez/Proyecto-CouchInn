@@ -11,9 +11,9 @@ class Reservas_Model extends CI_Model {
 		$sentence = "	SELECT r.id_reserva,r.fecha_inicio,r.fecha_fin,r.estado,u.email,u.nombre,u.id_usuario
 						FROM reserva r 	inner join couch c on (r.id_couch = c.id_couch)
 										inner join usuario u on (r.id_usuario = u.id_usuario)
-					 	WHERE c.id_couch = r.id_couch
+					 	WHERE c.id_couch = ?
 					 	ORDER BY r.estado;";
-		$query = $this->db->query($sentence);
+		$query = $this->db->query($sentence,array($id_couch));
 		return $query->result();
 	}
 
@@ -70,10 +70,37 @@ class Reservas_Model extends CI_Model {
 		$query = $this->db->query($sentence,$datos);
 	}
 
+	////////Aceptar Reserva/////////////////////
 	public function aceptarReserva($id_reserva)
 	{
+		$this->agregarRegistroDeAceptarReserva($id_reserva);
 		$sentence = "UPDATE  `couchInn`.`reserva` SET  `estado` =  'aceptada' WHERE  `reserva`.`id_reserva` = ? ;";
 		$query = $this->db->query($sentence, array($id_reserva));
+	}
+
+	public function agregarRegistroDeAceptarReserva($id_reserva)
+	{
+		$sentence = "INSERT INTO  reservas_aceptadas (
+							`id_reserva_aceptada` ,
+							`id_reserva` ,
+							`fecha`)
+					VALUES (NULL ,?,?);";
+		$query = $this->db->query($sentence, array($id_reserva,date("Y-m-d")));
+	}
+	////////////////////////////////////////////
+
+	//Usado en solicitudes aceptadas
+	public function getReservasAceptadasEntre2Fechas($fecha_inicio,$fecha_fin)
+	{
+		$sentence ="SELECT r.*,u.email,c.titulo
+					FROM reservas_aceptadas r
+							inner join reserva re on r.id_reserva = re.id_reserva
+							inner join usuario u on re.id_usuario = u.id_usuario
+							inner join couch c on re.id_couch = c.id_couch
+					WHERE r.fecha between ? and ?
+					ORDER BY c.titulo";
+		$query = $this->db->query($sentence, array($fecha_inicio,$fecha_fin));
+		return $query->result();
 	}
 
 	public function rechazarReserva($id_reserva)

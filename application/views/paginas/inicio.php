@@ -52,3 +52,8 @@
 		?>	
 	</ul>
 </div>
+
+<br>
+<a href="<?php echo site_url('index.php/ayuda'); ?>">
+	<p style="text-align:center"> ¿Quieres aprender a usar la página? Click aquí </p>
+</a>
