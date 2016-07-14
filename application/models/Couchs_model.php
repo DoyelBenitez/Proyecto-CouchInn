@@ -221,4 +221,83 @@ class Couchs_Model extends CI_Model {
 			$sentence = "UPDATE  `couchInn`.`couch` SET  `tipohospedaje` =  ? WHERE  `couch`.`id_couch` = ?;";
 			$query = $this->db->query($sentence,array($tipohospedaje,$id_couch));
 		}
+
+		public function getCouchsByBusqueda($palabra)
+        {
+        	$this->db->like('titulo', $palabra);
+        	$query = $this->db->get('couch');
+        	if ($query->num_rows() > 0){
+        		return $query->result();
+        	}
+
+        }
+
+        public function getCouchsByBusquedaCriterio($criterio)
+        {
+        	$query = $this->db->query("SELECT * FROM couch WHERE estado = 'normal' and like IN $criterio");
+        	return $query->restult();
+        
+        }
+
+        public function getCouchsByTipo($tipo)
+        {
+        	$query = $this->db->query("SELECT * FROM couch c inner join tipo_de_couch t on c.id_tipo = t.id_tipo WHERE t.tipo = ?", array($tipo));
+        	return $query->result();
+        }
+
+        public function getCouchsByCumpleLocalidadById_couch($id_couch, $localidad)
+		{
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = $id_couch and couch.localidad like '%$localidad%' ");
+			return $query->result();
+		}
+        
+
+        public function getCouchsCumpleCapacidadById_couch($id_couch, $capacidad)
+        { 
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = ? and couch.capacidad <= ? ", array($id_couch, $capacidad));
+			return $query->result();
+		}
+
+		public function getCouchsCumpleCapacidad($capacidad)
+		{
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.capacidad <= ? ", array($capacidad));
+			return $query->result();
+		}
+
+		public function getCouchsCumpleLocalidad($localidad)
+		{
+			$query = $this->db->query("SELECT * FROM couch WHERE localidad like '%$localidad%' ");
+			return $query->result();
+		}
+
+		public function getCouchsCumpleTituloById_couch($id_couch, $titulo)
+		{
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = $id_couch and couch.titulo like '%$titulo%' ");
+			return $query->result();
+		}
+
+		public function getCouchsCumpleTitulo($titulo)
+		{
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.titulo like '%$titulo%' ");
+			return $query->result();
+		}
+
+		public function getCouchsCumpleDescripcionById_Couch($id_couch, $descripcion)
+		{
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = $id_couch and couch.descripcion like '%$descripcion%' ");
+			return $query->result();
+		}
+
+		public function getCouchsCumpleDescripcion($descripcion)
+		{
+			$query =$this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.descripcion like '%$descripcion%'");
+			return $query->result();
+		}
+
+		public function getTipoDeCouch() //FIJARSE XQ NO ESTABA ESTA FUNCION
+		{
+				$query = $this->db->query('SELECT * FROM tipo_de_couch  ');
+				 return $query->result();
+		}
+
 }

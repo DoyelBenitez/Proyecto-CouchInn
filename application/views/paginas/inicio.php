@@ -1,8 +1,3 @@
-
-
-
-
-
 <div class="container " >
 	<ul class=" col-lg-offset-3 centro col-lg-6 ">
 

@@ -50,8 +50,15 @@ class Descripcion extends CI_Controller {
 					$user_log = $this->sesiones_model->getId($user_log);
 					$user_log = reset($user_log)->id_usuario;
 					$this->couchs_model->setComentario($comentario,$id_user_couch,$user_log);
+					echo "<script> alert('Comentario enviado')</script>";	
 					$aux['$_POST'] = $_POST['id_couch'];
-					echo "<script> alert('Comentario agregado'); window.location.href = '" .base_url(). "';</script>";
+
+					$_POST['booleano'] = "FALSE";
+					$id = $_POST['id_couch'];
+					$data['id_couch'] = $id;
+					$data['page_header'] = '';
+					$data['comentarios'] = $this->couchs_model->getComentarios($id);
+					$data['estado'] = "FALSE";
 				}
 
 			}
@@ -63,6 +70,7 @@ class Descripcion extends CI_Controller {
 					$data['page_header'] = '';
 					$data['comentarios'] = $this->couchs_model->getComentarios($id);
 					$data['estado'] = "TRUE";
+					$data['id_couch'] = $id;
 				}
 				else
 				{// si no labura normalmente mostrandote 10 comentarios
@@ -72,13 +80,13 @@ class Descripcion extends CI_Controller {
 					$data['page_header'] = '';
 					$data['comentarios'] = $this->couchs_model->getComentarios($id);
 					$data['estado'] = "FALSE";
-				}
+				}			
+			}
 				$this->load->view('templates/header.php', $data);
 				$this->load->view('paginas/couch/verImagenes', $data);		
 				$this->load->view('paginas/couch/verDescripcion', $data);
 				$this->load->view('paginas/couch/verBotonComentar', $data);
 				$this->load->view('paginas/couch/ver_Comentarios',$data);
-				$this->load->view('templates/footer.php', $data);	
-		}
+				$this->load->view('templates/footer.php', $data);
 	}			
 }
