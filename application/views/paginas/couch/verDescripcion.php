@@ -39,7 +39,7 @@
 				<h3>Publicado por: <?php echo $usuario->nombre?></h3>
 				<?php 
 					$usuarioLogueado = $this->session->userdata('email');
-					if ($usuarioLogueado != $usuario->email) { ?>
+					if (($usuarioLogueado != $usuario->email) and ($couch->estado == 'normal')) { ?>
 						<!-- Botón para ver perfil del dueño -->
 						<form method="post" action="<?php echo site_url('index.php/verUsuario').'/'.$usuario->id_usuario; ?>">
 							<input type="hidden" name="id_couch" id="id_couch" value="<?php echo $id_couch ?>">

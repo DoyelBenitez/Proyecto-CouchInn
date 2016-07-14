@@ -11,8 +11,8 @@ class Reservas_Model extends CI_Model {
 		$sentence = "	SELECT r.id_reserva,r.fecha_inicio,r.fecha_fin,r.estado,u.email,u.nombre,u.id_usuario
 						FROM reserva r 	inner join couch c on (r.id_couch = c.id_couch)
 										inner join usuario u on (r.id_usuario = u.id_usuario)
-					 	WHERE c.id_couch = ?
-					 	ORDER BY r.estado;";
+						WHERE c.id_couch = ?
+						ORDER BY r.estado;";
 		$query = $this->db->query($sentence,array($id_couch));
 		return $query->result();
 	}
@@ -55,10 +55,10 @@ class Reservas_Model extends CI_Model {
 						FROM	reserva r
 						WHERE 	(r.id_couch = '".$id_couch."') and (r.estado = 'aceptada') and
 								((r.fecha_fin between '".$fecha_inicio."' and '".$fecha_fin."') or
-      							(r.fecha_inicio between '".$fecha_inicio."' AND '".$fecha_fin."'));";
+								(r.fecha_inicio between '".$fecha_inicio."' AND '".$fecha_fin."'));";
 
-      	$query = $this->db->query($sentence);
-      	return $query->result();
+		$query = $this->db->query($sentence);
+		return $query->result();
 	}
 
 	public function agregarReserva($datos)
@@ -144,6 +144,22 @@ class Reservas_Model extends CI_Model {
 						ORDER BY c.id_couch";
 
 		$query = $this->db->query($sentence, array($id_usuario));
+		return $query->result();
+	}
+
+	//Usado en busqueda
+	public function getCouchConDisponibilidadEn($fecha_inicio,$fecha_fin)
+	{
+		$sentence ="SELECT co.*
+					FROM couch co
+					WHERE co.id_couch not in
+					(	SELECT 	r.id_couch
+						FROM	reserva r
+						WHERE 	(r.estado = 'aceptada') and not
+								((r.fecha_fin between ? and ?) or
+								(r.fecha_inicio between ? and ?));";
+
+		$query = $this->db->query($sentence, array($fecha_inicio,$fecha_fin,$fecha_inicio,$fecha_fin));
 		return $query->result();
 	}
 }

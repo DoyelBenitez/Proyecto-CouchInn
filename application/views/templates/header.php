@@ -103,7 +103,7 @@
 								}
 							?> 
 
-							<!-- Opciones premium o comun (Para couchs)-->
+							<!-- Opciones premium o comun-->
 							<?php 
 								if (($usuarioTipo == 'comun') or ($usuarioTipo == 'premium')) {
 									echo '<li class="dropdown-header">Couchs</li>';
@@ -113,8 +113,10 @@
 									echo '<li class="dropdown-header">Reservas</li>';
 									echo '<li> <a href= "'.site_url('index.php/reservas/verMisReservas').'"> Mis Reservas </a></li>';
 									echo '<li> <a href= "'.site_url('index.php/reservas/verCouchsVisitados').'"> Mis Couchs visitados </a></li>';
-								}
-							 ?>
+									echo '<li> <a href= "'.site_url('index.php/sesiones/darDeBajaUsuario').'"> Darse de baja a CouchInn </a></li>';
+									
+								
+								} ?>
 
 							<!-- Opciones del usuario comun -->
 							<?php 
