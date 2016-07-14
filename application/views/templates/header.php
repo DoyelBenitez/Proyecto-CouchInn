@@ -45,7 +45,7 @@
 
 						if(!empty($usuarioTipo))
 						{
-							$mailUserLog = $this->session->userdata('email');
+						/*	$mailUserLog = $this->session->userdata('email');
 							$idUserLog = $this->sesiones_model->getUserByEmail($mailUserLog);
 							$idUserLog = reset($idUserLog)->id_usuario; // aca me quede con el id del user logeado
 							$couchsUserLog = $this->couchs_model->getCouchsById_user($idUserLog);//me quedo con sus couchs 
@@ -57,7 +57,7 @@
 								$cantMenSinR = reset($cantMenSinR);
 								$totalCantMen = $totalCantMen + $cantMenSinR; 	//totalCanMen va a tener la suma de todos los couchs
 							}
-							echo '<li><a href="'.site_url('index.php/couch/responderComentario').'">Tienes ('.$totalCantMen.') mensajes sin responder</a></li>';
+							echo '<li><a href="'.site_url('index.php/couch/responderComentario').'">Tienes ('.$totalCantMen.') mensajes sin responder</a></li>'; */
 							echo '<li><a href="'.site_url('index.php/sesiones/cerrarSesion').'">Cerrar Sesión ('.$usuarioNombre.')</a></li>';
 						}
 						else

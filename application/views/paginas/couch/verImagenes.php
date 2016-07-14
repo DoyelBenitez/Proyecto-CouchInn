@@ -39,16 +39,7 @@
 				<center><input type="submit" value="Ver reservas" class="btn btn-default"/></center>
 				</form>
 			</div>
-			<br>
-			<!-- Si tiene pregunta para responder le muestra la opcion -->
-			<div class="container" style="text-align center"> 
-				<div class="text-center">
-				<a href="<?php echo site_url('index.php/couch/responderComentario'); ?>">
-					<p> ¿Quieres responder? apreta aquí.</p>
-				</a>
-				</div>
-			</div>
-				
+			<br>	
 <?php	} 
 		
 		else 
