@@ -15,8 +15,13 @@ class Inicio extends CI_Controller {
 
 	public function index()
 	{
-		
+		$this->form_validation->set_rules('Localidad', 'Localidad', 'alpha');
+		$this->form_validation->set_rules('descripcion', 'descripcion', 'alpha');
 		$this->form_validation->set_rules('titulo', 'titulo', 'alpha');
+		$this->form_validation->set_rules('desde', 'desde', '');
+		$this->form_validation->set_rules('hasta', 'hasta', '');
+
+		
 
 		if($this->form_validation->run() == FALSE){ // entra cuando no se apreto el boton
 			$data['title'] = 'CouchInn';
@@ -32,12 +37,13 @@ class Inicio extends CI_Controller {
 			$this->load->view('templates/footer.php', $data);
 		}
 		else{
+
 				
 				if (!empty($_POST[0])) 
 				{
 					unset($_POST[0]);	
 				}
-				print_r($_POST);
+				
 				// EMPIEZO A BUSCAR POR TIPO
 
 				$resuldatoID = array();
@@ -49,33 +55,36 @@ class Inicio extends CI_Controller {
 						{	
 							$caso_prueba = substr($caso_prueba, 0 , -1); // me quedo con el tipo
 							$caso_prueba = $this->couchs_model->getCouchsByTipo($caso_prueba); //me quedo con el couch que cumple
-							$caso_prueba = reset($caso_prueba);
-
-							array_push($resuldatoID,$caso_prueba );
+							foreach ($caso_prueba as $couch) {
+								array_push($resuldatoID,$couch );
+							}
 						} 
 					}
 				}
+
+				
 				//print_r($resuldatoID); // TEST
 				
 				// EMPIEZO A BUSCAR POR CAPACIDAD
 
 				if (!empty($_POST['cantPersonas'])) //si se selecciono capacidad
 				{
-					//echo "Existe";
+					
 					if (!empty($resuldatoID)) //SI PREVIAMENTE SE SELECCINO UN TIPO, BUSQUEDA ANIDADA
-					{	
+					{	echo "Existe";
 						$resultAux = array();
 						foreach ($resuldatoID as $couch )
 				 		{	
 				 			$temp =$this->couchs_model->getCouchsCumpleCapacidadById_couch($couch->id_couch, $_POST['cantPersonas']);
+				 			
 							if (!empty($temp)) // verifico que tenga algo para que no me llene el arreglo con nada
 							{
 								$temp = reset($temp);
 								array_push($resultAux, $temp);
 							}
 						}
-						//$resuldatoID = $resultAux;
-						//print_r($resuldatoID); // TEST
+					$resuldatoID = $resultAux;
+				  //print_r($resuldatoID); // TEST
 						
 						
 					}
@@ -122,7 +131,6 @@ class Inicio extends CI_Controller {
 					if (!empty($resuldatoID)) 
 					{
 						$resultAux = array();
-						
 						foreach ($resuldatoID as $couch) 
 						{
 							
@@ -168,6 +176,70 @@ class Inicio extends CI_Controller {
 						$resuldatoID = $this->couchs_model->getCouchsCumpleDescripcion($_POST['descripcion']);
 					}
 				}
+
+				//EMPIEZO A BUSCAR POR FECHA DESDE
+
+				if (!empty($_POST['desde'])) 
+				{
+					if (!empty($resuldatoID)) 
+					{
+						$resultAux = array();
+						$fecha = $_POST['desde'];
+						$fecha = str_replace("-","",$fecha);
+						foreach ($resuldatoID as $couch) 
+						{						
+							$temp = $this->couchs_model->getCouchByMayorFechaById_Couch($couch->id_couch, $fecha);
+							if (!empty($temp)) 
+							{
+
+								$temp = reset($temp);
+								array_push($resultAux, $temp);
+							}
+						}
+						$resuldatoID = $resultAux;
+					}
+					else
+					{
+						$fecha = $_POST['desde'];
+						$fecha = str_replace("-","",$fecha);
+						
+						$resuldatoID = $this->couchs_model->getCouchByMayorFecha($fecha);
+					}
+				}
+
+				// EMPIEZO A BUSCAR POR FECHA HASTA
+
+				if (!empty($_POST['hasta'])) 
+				{
+					if (!empty($resuldatoID)) 
+					{
+						$resultAux = array();
+						$fecha = $_POST['hasta'];
+						$fecha = str_replace("-","",$fecha);
+						foreach ($resuldatoID as $couch) 
+						{	
+							$temp = $this->couchs_model->getCouchByMenorFechaById_Couch($couch->id_couch, $fecha);
+							if (!empty($temp)) 
+							{
+								$temp = reset($temp);
+								array_push($resultAux, $temp);
+							}
+						}
+						$resuldatoID = $resultAux;
+					}
+					else
+					{
+						$fecha = $_POST['hasta'];
+						$fecha = str_replace("-","",$fecha);
+						$resuldatoID = $this->couchs_model->getCouchByMenorFecha($fecha);
+					}
+				}
+
+			//	print_r($resuldatoID);
+			//print_r($_POST);
+
+
+
 			$data['title'] = 'CouchInnN';
 			$data['page_header'] = '';
 			$palabra= $_POST['boton'];
@@ -190,8 +262,21 @@ class Inicio extends CI_Controller {
 				$this->load->view('templates/footer.php', $data);
 			}
 		}
+	}
 
-
-
+	public function fechaFinEsMayorAInicio()
+	{
+		$fecha_inicio = $this->input->post('desde'); 
+		$fecha_fin = $this->input->post('hasta');
+		if($fecha_inicio < $fecha_fin)
+		{
+			return true;
+		}
+		else
+		{
+			$this->form_validation->set_message('fechaFinEsMayorAInicio','La fecha de fin no puede ser anterior o igual a la de inicio.');
+			return false;
+		}
 	}
 }
+
