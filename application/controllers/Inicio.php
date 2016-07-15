@@ -15,7 +15,7 @@ class Inicio extends CI_Controller {
 
 	public function index()
 	{
-		$this->form_validation->set_rules('cantPersonas', 'cantPersonas', 'numeric');
+		$this->form_validation->set_rules('cantPersonas', 'cantPersonas', 'numeric|callback_cantidadIngresada');
 		$this->form_validation->set_rules('Localidad', 'Localidad', 'alpha');
 		$this->form_validation->set_rules('descripcion', 'descripcion', 'alpha');
 		$this->form_validation->set_rules('titulo', 'titulo', 'alpha');
@@ -266,6 +266,20 @@ class Inicio extends CI_Controller {
 		if(!empty($_POST['desde']) and empty($_POST['hasta']) or empty($_POST['desde']) and !empty($_POST['hasta'] ))
 		{
 			return false;
+		}
+		elseif ($_POST['desde'] > $_POST['hasta'] ) {
+			return false;
+		}
+	}
+
+	public function cantidadIngresada()
+	{
+		if ($_POST['cantPersonas'] > 25) {
+			return false;
+		}
+		else
+		{
+			return true;
 		}
 	}
 }

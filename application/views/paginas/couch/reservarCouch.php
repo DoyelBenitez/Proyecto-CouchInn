@@ -13,7 +13,7 @@
 		<!--Fecha de inicio de la reserva -->
 
 		<label for="fecha_inicio"> Fecha de inicio: </label>
-		<input type="date" name="fecha_inicio" value="<?php if(isset($_POST['fecha_inicio'])) echo $_POST['fecha_inicio']; ?>" class="form-control" step="1" min="<?php echo date('Y-m-d'); ?>" max="" />
+		<input type="date" name="fecha_inicio" value="<?php if(isset($_POST['fecha_inicio'])) echo $_POST['fecha_inicio']; ?>" class="form-control" step="1" min="<?php echo date('Y-m-d'); ?>" max="2020-12-31" />
 		
 			<?php if(!empty(form_error('fecha_inicio'))){
 				echo '<div class="alert alert-danger">';
@@ -26,7 +26,7 @@
 		<!-- Fecha de fin de la reserva -->
 
 		<label for="fecha_fin"> Fecha de fin: </label>
-		<input type="date" name="fecha_fin" value="<?php if(isset($_POST['fecha_fin'])) echo $_POST['fecha_fin']; ?>" class="form-control" step="1" min="<?php echo date('Y-m-d'); ?>" max="" />
+		<input type="date" name="fecha_fin" value="<?php if(isset($_POST['fecha_fin'])) echo $_POST['fecha_fin']; ?>" class="form-control" step="1" min="<?php echo date('Y-m-d'); ?>" max="2020-12-31" />
 		
 			<?php if(!empty(form_error('fecha_fin'))){
 				echo '<div class="alert alert-danger">';

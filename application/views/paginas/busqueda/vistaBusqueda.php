@@ -58,7 +58,7 @@
 
  		<?php if(!empty(form_error('cantPersonas'))){
 				echo '<div class="alert alert-danger">';
-				echo form_error('capacidad');
+				echo 'Solo se permite numeros MAX (25)';
 				echo '</div>';
 			}
 			?>
@@ -74,7 +74,7 @@
 		
 			<?php if(!empty(form_error('hasta'))){
 				echo '<div class="alert alert-danger">';
-				echo 'Los campos fechas deben completarse';
+				echo 'Fecha incorrecta o campos incompletos';
 				echo '</div>';
 			}
 			?>
