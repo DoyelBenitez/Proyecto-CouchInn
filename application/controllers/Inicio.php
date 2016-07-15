@@ -52,15 +52,16 @@ class Inicio extends CI_Controller {
 
 				$resuldatoID = array();
 
-				if (!empty($_POST['cabaña']) or !empty($_POST['dpto']) or !empty($_POST['casa']) or !empty($_POST['Habitacion'])) {
+				if (!empty($_POST['campo']) or !empty($_POST['dpto']) or !empty($_POST['casa']) or !empty($_POST['Habitacion'])) {
 
 					foreach ($_POST as $caso_prueba) // empiezo a buscar los parametros de busqueda
 					{
 					if (!empty($caso_prueba)) // si la variable Localidad contiene algo lo agrego al arreglo
 					{	
-	   					if (preg_match('/[0-9]{1}/', $caso_prueba) and ($caso_prueba != 99) and ($caso_prueba != 5) and ($caso_prueba != 10)) // si el valor es un tipo hago la busqueda 
+	   					if (preg_match('/[0-9]{1}/', $caso_prueba))  // si el valor es un tipo hago la busqueda 
 						{	
 							$caso_prueba = substr($caso_prueba, 0 , -1); // me quedo con el tipo
+							print_r($caso_prueba);
 							$caso_prueba = $this->couchs_model->getCouchsByTipo($caso_prueba); //me quedo con el couch que cumple
 							foreach ($caso_prueba as $couch) {
 								array_push($resuldatoID,$couch );
@@ -72,6 +73,7 @@ class Inicio extends CI_Controller {
 						$_POST['valido'] = 'false';
 					}
 				}
+			//	print_r($_POST);
 
 
 				

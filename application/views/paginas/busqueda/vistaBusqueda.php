@@ -65,12 +65,12 @@
 
 	<h4>Disponibilidad</h4>
 	<label for="desde"> Desde: </label>
-		<input type="date" name="desde"  value="<?php if(isset($_POST['desde'])) echo $_POST['desde']; ?>" class="form-control" step="1" min="2015-01-02" max="2018-12-31" />
+		<input type="date" name="desde"  value="<?php if(isset($_POST['desde'])) echo $_POST['desde']; ?>" class="form-control" step="1" min="<?php echo date('Y-m-d'); ?>" max="2018-12-31" />
 		
 			
 	
 		<label for="hasta"> Hasta: </label>
-		<input type="date" name="hasta" value="<?php if(isset($_POST['hasta'])) echo $_POST['hasta']; ?>" class="form-control"  step="1" min="2015-01-02" max="2018-12-31" />
+		<input type="date" name="hasta" value="<?php if(isset($_POST['hasta'])) echo $_POST['hasta']; ?>" class="form-control"  step="1" min="<?php echo date('Y-m-d'); ?>" max="2018-12-31" />
 		
 			<?php if(!empty(form_error('hasta'))){
 				echo '<div class="alert alert-danger">';

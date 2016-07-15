@@ -5,9 +5,9 @@
 <H4>Busqueda por: 
 <?php
 
-if (!empty($post['cabaña']))
+if (!empty($post['campo']))
  {
-     $post['cabaña'] =substr($post['cabaña'], 0 , -1); 
+     $post['campo'] =substr($post['campo'], 0 , -1); 
  }
     if (!empty($post['dpto'])) 
  {
