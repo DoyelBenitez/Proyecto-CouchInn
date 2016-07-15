@@ -330,21 +330,36 @@ class Couchs_Model extends CI_Model {
 			return $query->result();
 		}
 
-		//Usado en busqueda
-	public function getCouchConDisponibilidadEn($fecha_inicio,$fecha_fin)
-	{
-		$sentence ="SELECT co.*
-					FROM couch co
-					WHERE co.id_couch not in
-					(	SELECT 	r.id_couch
+				public function getCouchConDisponibilidadById_couchEn($id_couch,$fecha_inicio,$fecha_fin)
+		{
+		$sentence ="SELECT 	co.*
+					FROM	couch co
+					WHERE 	co.estado = 'normal' and co.id_couch = ? and co.id_couch not in
+						(SELECT 	r.id_couch
 						FROM	reserva r
-						WHERE 	(r.estado = 'aceptada') and not
+						WHERE 	(r.estado = 'aceptada') and
 								((r.fecha_fin between ? and ?) or
-								(r.fecha_inicio between ? and ?)))";
+								(r.fecha_inicio between ? and ?)));";
 
-		$query = $this->db->query($sentence, array($fecha_inicio,$fecha_fin,$fecha_inicio,$fecha_fin));
+		$query = $this->db->query($sentence,array($id_couch,$fecha_inicio,$fecha_fin,$fecha_inicio,$fecha_fin));
 		return $query->result();
-	}
+		}
+
+
+			public function getCouchConDisponibilidadEn($fecha_inicio,$fecha_fin)
+		{
+		$sentence ="SELECT 	co.*
+					FROM	couch co
+					WHERE 	co.estado = 'normal' and co.id_couch not in
+						(SELECT 	r.id_couch
+						FROM	reserva r
+						WHERE 	(r.estado = 'aceptada') and
+								((r.fecha_fin between ? and ?) or
+								(r.fecha_inicio between ? and ?)));";
+
+		$query = $this->db->query($sentence,array($fecha_inicio,$fecha_fin,$fecha_inicio,$fecha_fin));
+		return $query->result();
+		}
 
 
 }

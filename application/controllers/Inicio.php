@@ -216,7 +216,7 @@ class Inicio extends CI_Controller {
 						$resultAux = array();
 						foreach ($resuldatoID as $couch) 
 						{						
-							$temp = $this->couchs_model->getCouchByMayorFechaById_Couch($couch->id_couch, $_POST['desde'], $_POST['hasta']); // ACA VA LA OTRA FUNCION HACE LO MISMO QUE LA QUE HICISTE PERO CON EL ID COUCH
+							$temp = $this->couchs_model->getCouchConDisponibilidadById_couchEn($couch->id_couch, $_POST['desde'], $_POST['hasta']); 
 							if (!empty($temp)) 
 							{
 
