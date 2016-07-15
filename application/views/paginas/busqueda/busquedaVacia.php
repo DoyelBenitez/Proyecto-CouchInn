@@ -3,28 +3,32 @@
 
 <form class="form-inline" role="form">
 <H4>Busqueda por: 
+<?php
 
-<?php foreach ($post as $caso_prueba) {
-	
-	if (preg_match('/[0-9]{1}/', $caso_prueba) and ($caso_prueba != 99) and ($caso_prueba != 5) and ($caso_prueba != 10))
-	{	
-		$caso_prueba = substr($caso_prueba, 0 , -1);
-		echo $caso_prueba . " ";
-    }
-    elseif ($caso_prueba == 99) {
-    	echo "'mas de 10' ";
-    }
-    elseif ($caso_prueba == 5) {
-    	echo "'5..10' ";
-    }
-    elseif ($caso_prueba == 10) {
-    	echo "'1..5' ";
-    }
-    else {
-    	echo $caso_prueba . " ";
-    }
-
+if (!empty($post['cabaña']))
+ {
+     $post['cabaña'] =substr($post['cabaña'], 0 , -1); 
  }
+    if (!empty($post['dpto'])) 
+ {
+     $post['dpto'] = substr($post['dpto'], 0, -1);
+ }
+    if (!empty($post['casa'])) 
+ {
+     $post['casa'] = substr($post['casa'], 0, -1);
+ }
+    if (!empty($post['Habitacion'])) 
+ {
+     $post['Habitacion'] = substr($post['Habitacion'], 0, -1);
+ }
+     foreach ($post as $caso_prueba)
+    {
+
+       if ($caso_prueba != 'true' and $caso_prueba != 'false') {
+            echo $caso_prueba . " ";
+       }
+   }
+ 
  ?>
 </form>
 

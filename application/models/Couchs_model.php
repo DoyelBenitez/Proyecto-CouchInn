@@ -254,13 +254,13 @@ class Couchs_Model extends CI_Model {
 
         public function getCouchsCumpleCapacidadById_couch($id_couch, $capacidad)
         { 
-			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = ? and couch.capacidad <= ? ", array($id_couch, $capacidad));
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.id_couch = ? and couch.capacidad = ? ", array($id_couch, $capacidad));
 			return $query->result();
 		}
 
 		public function getCouchsCumpleCapacidad($capacidad)
 		{
-			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.capacidad <= ? ", array($capacidad));
+			$query = $this->db->query("SELECT * FROM couch WHERE couch.estado = 'normal' and couch.capacidad = ? ", array($capacidad));
 			return $query->result();
 		}
 
@@ -294,36 +294,57 @@ class Couchs_Model extends CI_Model {
 			return $query->result();
 		}
 
-		public function getTipoDeCouch() //FIJARSE XQ NO ESTABA ESTA FUNCION
+		public function getTipoDeCouch() 
 		{
 				$query = $this->db->query("SELECT * FROM tipo_de_couch t  WHERE t.estado = 'normal'");
 				 return $query->result();
 		}
 
-		public function getCouchByMayorFecha($fecha)
+		public function getCouchByMayorFecha($fecha)  // HAY QUE BORRARLO
 		{
 			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.fecha > ?",array($fecha));
 			return $query->result();
 		}
 
-		public function getCouchByMayorFechaById_Couch($id_couch, $fecha)
+		public function getCouchByMayorFechaById_Couch($id_couch, $fecha)  // HAY QUE BORRARLO
 		{
 			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.id_couch = ".$id_couch." and c.fecha > ".$fecha);
 			return $query->result();
 		}
 
-		public function getCouchByMenorFecha($fecha)
+		public function getCouchByMenorFecha($fecha)  // HAY QUE BORRARLO
 		{
 			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.fecha < ".$fecha);
 			return $query->result();
 		}
 
-		public function getCouchByMenorFechaById_Couch($id_couch, $fecha)
+		public function getCouchByMenorFechaById_Couch($id_couch, $fecha)  // HAY QUE BORRARLO
 		{
 			$query = $this->db->query("SELECT * FROM couch c WHERE c.estado = 'normal' and c.id_couch = ".$id_couch." and c.fecha < ".$fecha);
 			return $query->result();
 		}
 
+		public function getCouchDisponibleEntre2Fechas($fecha_desde, $fecha_hasta) // HAY QUE BORRARLO
+		{
+			$query = $this->db->query("SELECT * FROM couch c inner join reserva r WHERE r.fecha_inicio >= '$fecha_desde' and  r.fecha_fin <= '$fecha_hasta'");
+			return $query->result();
+		}
+
+		//Usado en busqueda
+	public function getCouchConDisponibilidadEn($fecha_inicio,$fecha_fin)
+	{
+		$sentence ="SELECT co.*
+					FROM couch co
+					WHERE co.id_couch not in
+					(	SELECT 	r.id_couch
+						FROM	reserva r
+						WHERE 	(r.estado = 'aceptada') and not
+								((r.fecha_fin between ? and ?) or
+								(r.fecha_inicio between ? and ?)))";
+
+		$query = $this->db->query($sentence, array($fecha_inicio,$fecha_fin,$fecha_inicio,$fecha_fin));
+		return $query->result();
+	}
 
 
 }

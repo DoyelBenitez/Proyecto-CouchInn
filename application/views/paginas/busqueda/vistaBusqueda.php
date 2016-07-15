@@ -24,25 +24,8 @@
         		
 <?php 	} ?>
 
-<h4> Capacidad  </h4>
 
-	<div class="form-group">
-		<div class="radio">
- 		 	<label><input type="radio"  name= "cantPersonas" value= 5 > hasta 5</label>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<div class="radio">
-  			<label><input type="radio" name= "cantPersonas" value=10> hasta 10  </label>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<div class="radio">
-  			<label><input type="radio" name= "cantPersonas" value= 99> mas de 10</label>
-		</div>
-	</div>
+	
 
 	
  		<input name="descripcion" type="text" class="form-control" placeholder="Busqueda por descripcion" value="<?php if(isset($_POST['descripcion'])) echo $_POST['descripcion']; ?>" size="50" maxlength="70"  > </input>
@@ -71,27 +54,32 @@
 				echo '</div>';
 			}
 			?>
+				<input name="cantPersonas" type="text" class="form-control" placeholder="Capacidad (Max 25)" value="<?php if(isset($_POST['cantPersonas'])) echo $_POST['cantPersonas']; ?>" size="10" maxlength="10"  > </input>
+
+ 		<?php if(!empty(form_error('cantPersonas'))){
+				echo '<div class="alert alert-danger">';
+				echo form_error('capacidad');
+				echo '</div>';
+			}
+			?>
 
 	<h4>Disponibilidad</h4>
 	<label for="desde"> Desde: </label>
 		<input type="date" name="desde"  value="<?php if(isset($_POST['desde'])) echo $_POST['desde']; ?>" class="form-control" step="1" min="2015-01-02" max="2018-12-31" />
 		
-			<?php if(!empty(form_error('desde'))){
-				echo '<div class="alert alert-danger">';
-				echo form_error('desde');
-				echo '</div>';
-			}
-			?>
+			
 	
 		<label for="hasta"> Hasta: </label>
 		<input type="date" name="hasta" value="<?php if(isset($_POST['hasta'])) echo $_POST['hasta']; ?>" class="form-control"  step="1" min="2015-01-02" max="2018-12-31" />
 		
 			<?php if(!empty(form_error('hasta'))){
 				echo '<div class="alert alert-danger">';
-				echo form_error('hasta');
+				echo 'Los campos fechas deben completarse';
 				echo '</div>';
 			}
 			?>
+
+
 
 
 	<button name="boton" type="submit" class="btn btn-default">Buscar</button>
